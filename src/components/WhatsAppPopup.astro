@@ -1,0 +1,227 @@
+---
+import Icon from './Icon.astro';
+import { PRODUCTS } from '../data/site';
+
+/**
+ * Botão flutuante de WhatsApp com popup de formulário rápido.
+ * O envio abre o WhatsApp com a mensagem preenchida automaticamente
+ * (nome, momento, interesse e a página de onde o visitante escreveu).
+ */
+---
+
+<div id="wa-widget" class="fixed bottom-5 right-5 z-[60] sm:bottom-6 sm:right-6">
+  <!-- Popup -->
+  <div
+    id="wa-popup"
+    class="pointer-events-none absolute bottom-[4.5rem] right-0 w-[calc(100vw-2.5rem)] max-w-sm origin-bottom-right scale-95 opacity-0 transition-all duration-200 sm:w-96"
+    role="dialog"
+    aria-modal="false"
+    aria-labelledby="wa-popup-title"
+    aria-hidden="true"
+  >
+    <div class="overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-slate-200">
+      <!-- Cabeçalho estilo WhatsApp -->
+      <div class="flex items-center gap-3 bg-[#075E54] px-4 py-3.5">
+        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/15 text-white ring-1 ring-white/25">
+          <Icon name="flask" class="h-5 w-5" />
+        </span>
+        <div class="min-w-0 flex-1">
+          <p class="truncate text-sm font-bold text-white" id="wa-popup-title">Marca Lab — Suplementos White Label</p>
+          <p class="mt-0.5 flex items-center gap-1.5 text-xs text-emerald-100">
+            <span class="h-1.5 w-1.5 rounded-full bg-emerald-300"></span>
+            Online · responde em minutos
+          </p>
+        </div>
+        <button
+          type="button"
+          id="wa-close"
+          class="flex h-8 w-8 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+          aria-label="Fechar"
+        >
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+        </button>
+      </div>
+
+      <!-- Formulário rápido -->
+      <form id="wa-form" class="space-y-4 p-4" novalidate>
+        <p class="text-sm leading-relaxed text-slate-600">
+          Responda em 10 segundos e continue no WhatsApp com tudo preenchido:
+        </p>
+
+        <div>
+          <label for="wa-nome" class="block text-sm font-semibold text-slate-800">Seu nome*</label>
+          <input
+            id="wa-nome"
+            name="nome"
+            type="text"
+            autocomplete="name"
+            class="mt-1.5 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-brand-500 focus:outline-none focus:ring-3 focus:ring-brand-100"
+            placeholder="Como podemos te chamar?"
+          />
+        </div>
+
+        <fieldset>
+          <legend class="block text-sm font-semibold text-slate-800">O que você quer fazer?*</legend>
+          <div class="mt-1.5 grid gap-2">
+            <label class="wa-chip"><input type="radio" name="momento" value="Quero criar uma marca nova" class="peer sr-only"><span class="flex items-center gap-2"><Icon name="sparkle" class="h-4 w-4 shrink-0 text-brand-600" /><span class="font-medium">Criar minha marca do zero</span></span></label>
+            <label class="wa-chip"><input type="radio" name="momento" value="Ja tenho marca e quero cotar a producao" class="peer sr-only"><span class="flex items-center gap-2"><Icon name="tag" class="h-4 w-4 shrink-0 text-brand-600" /><span class="font-medium">Já tenho marca — cotar produção</span></span></label>
+            <label class="wa-chip"><input type="radio" name="momento" value="Ja produzo e quero trocar de fornecedor" class="peer sr-only"><span class="flex items-center gap-2"><Icon name="factory" class="h-4 w-4 shrink-0 text-brand-600" /><span class="font-medium">Trocar de fornecedor</span></span></label>
+          </div>
+        </fieldset>
+
+        <div>
+          <label for="wa-interesse" class="block text-sm font-semibold text-slate-800">Produto de interesse</label>
+          <select
+            id="wa-interesse"
+            name="interesse"
+            class="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 focus:border-brand-500 focus:outline-none focus:ring-3 focus:ring-brand-100"
+          >
+            <option value="">Ainda não sei — quero orientação</option>
+            {PRODUCTS.map((p) => <option value={p.name.replace(' White Label', '')}>{p.name.replace(' White Label', '')}</option>)}
+            <option value="Outro produto">Outro produto / linha completa</option>
+          </select>
+        </div>
+
+        <p id="wa-error" class="hidden rounded-lg bg-red-50 px-3 py-2 text-xs font-medium text-red-700 ring-1 ring-red-200" role="alert"></p>
+
+        <button
+          type="submit"
+          class="flex w-full items-center justify-center gap-2 rounded-lg bg-[#25D366] px-4 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#1eb85a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700"
+        >
+          <Icon name="whatsapp" class="h-5 w-5" />
+          Continuar no WhatsApp
+        </button>
+
+        <p class="text-center text-[11px] leading-relaxed text-slate-400">
+          Sem cadastro — a conversa abre com seus dados já preenchidos.
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Botão flutuante -->
+  <button
+    type="button"
+    id="wa-toggle"
+    class="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl transition-transform duration-200 hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700"
+    aria-label="Falar no WhatsApp"
+    aria-expanded="false"
+    aria-controls="wa-popup"
+  >
+    <span id="wa-ping" class="absolute inset-0 rounded-full bg-[#25D366] opacity-25" aria-hidden="true"></span>
+    <span id="wa-icon-open" class="relative"><Icon name="whatsapp" class="h-7 w-7" /></span>
+    <span id="wa-icon-close" class="relative hidden"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></span>
+  </button>
+</div>
+
+<style>
+  #wa-ping {
+    animation: wa-ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+  @keyframes wa-ping {
+    0% { transform: scale(1); opacity: 0.25; }
+    75%, 100% { transform: scale(1.6); opacity: 0; }
+  }
+  .wa-chip {
+    display: flex;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-slate-200);
+    background: white;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8125rem;
+    color: var(--color-slate-700);
+    transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .wa-chip:hover {
+    border-color: var(--color-brand-300);
+  }
+  .wa-chip:has(input:checked) {
+    border-color: var(--color-brand-600);
+    background: var(--color-brand-50);
+    box-shadow: 0 0 0 1px var(--color-brand-600);
+  }
+  /* respeita quem prefere menos animação */
+  @media (prefers-reduced-motion: reduce) {
+    #wa-ping { animation: none; opacity: 0; }
+  }
+</style>
+
+<script>
+  const widget = document.getElementById('wa-widget');
+  const popup = document.getElementById('wa-popup');
+  const toggle = document.getElementById('wa-toggle') as HTMLButtonElement | null;
+  const closeBtn = document.getElementById('wa-close');
+  const ping = document.getElementById('wa-ping');
+  const iconOpen = document.getElementById('wa-icon-open');
+  const iconClose = document.getElementById('wa-icon-close');
+  const form = document.getElementById('wa-form') as HTMLFormElement | null;
+  const error = document.getElementById('wa-error');
+
+  let isOpen = false;
+
+  function setOpen(open: boolean) {
+    isOpen = open;
+    if (!popup || !toggle) return;
+    popup.classList.toggle('opacity-0', !open);
+    popup.classList.toggle('scale-95', !open);
+    popup.classList.toggle('pointer-events-none', !open);
+    popup.setAttribute('aria-hidden', String(!open));
+    toggle.setAttribute('aria-expanded', String(open));
+    iconOpen?.classList.toggle('hidden', open);
+    iconClose?.classList.toggle('hidden', !open);
+    if (open) ping?.remove(); // para o pulso depois da primeira interação
+    if (open) document.getElementById('wa-nome')?.focus();
+  }
+
+  toggle?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setOpen(!isOpen);
+  });
+  closeBtn?.addEventListener('click', () => setOpen(false));
+
+  document.addEventListener('click', (e) => {
+    if (isOpen && widget && !widget.contains(e.target as Node)) setOpen(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen) setOpen(false);
+  });
+
+  function showError(msg: string) {
+    if (!error) return;
+    error.textContent = msg;
+    error.classList.remove('hidden');
+  }
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!error) return;
+    error.classList.add('hidden');
+
+    const nome = (document.getElementById('wa-nome') as HTMLInputElement).value.trim();
+    const momento = (form.querySelector<HTMLInputElement>('input[name="momento"]:checked'))?.value ?? '';
+    const interesse = (document.getElementById('wa-interesse') as HTMLSelectElement).value;
+
+    if (nome.length < 2) {
+      showError('Digite seu nome para continuarmos.');
+      return;
+    }
+    if (!momento) {
+      showError('Escolha o que você quer fazer.');
+      return;
+    }
+
+    const pagina = `${location.pathname}${location.hash || ''}` || '/';
+    const lines = [
+      '*Marca Lab — Contato pelo site*',
+      '',
+      `*Nome:* ${nome}`,
+      `*Momento:* ${momento}`,
+      `*Interesse:* ${interesse || 'Ainda não sei — quero orientação'}`,
+      `*Página:* ${pagina}`,
+    ];
+    const url = `https://wa.me/5511975736730?text=${encodeURIComponent(lines.join('\n'))}`;
+    window.open(url, '_blank', 'noopener');
+    setOpen(false);
+  });
+</script>
