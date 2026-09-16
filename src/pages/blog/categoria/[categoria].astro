@@ -1,0 +1,58 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import BlogCard from '../../../components/BlogCard.astro';
+import CTASection from '../../../components/CTASection.astro';
+import Icon from '../../../components/Icon.astro';
+import { BLOG_CATEGORIES } from '../../../data/site';
+
+export function getStaticPaths() {
+  return Object.keys(BLOG_CATEGORIES).map((category) => ({
+    params: { categoria: category },
+    props: { category },
+  }));
+}
+
+const { category } = Astro.props;
+const cat = BLOG_CATEGORIES[category as keyof typeof BLOG_CATEGORIES];
+
+const posts = (await getCollection('blog'))
+  .filter((post: CollectionEntry<'blog'>) => post.data.category === category)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout
+  title={`${cat.label} — Blog da Marca Lab`}
+  description={cat.description}
+  canonical={`/blog/categoria/${category}`}
+>
+  <section class="section">
+    <div class="container-site">
+      <Breadcrumbs items={[{ label: 'Blog', href: '/blog' }, { label: cat.label }]} />
+      <div class="mx-auto mt-8 max-w-2xl text-center">
+        <p class="eyebrow">
+          <Icon name="tag" class="h-3.5 w-3.5" />
+          Categoria
+        </p>
+        <h1 class="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+          {cat.label}
+        </h1>
+        <p class="lead">{cat.description}</p>
+      </div>
+
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post) => <BlogCard post={post} />)}
+      </div>
+
+      <div class="mt-12 text-center">
+        <a href="/blog" class="btn-secondary">
+          <Icon name="arrow-left" class="h-4 w-4" />
+          Ver todos os artigos
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</BaseLayout>

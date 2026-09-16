@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import CTASection from '../../components/CTASection.astro';
+import Icon from '../../components/Icon.astro';
+import { PRODUCTS, EXTRA_PORTFOLIO, SITE } from '../../data/site';
+---
+
+<BaseLayout
+  title="Produtos White Label — Portfólio de Suplementos"
+  description="Portfólio completo de suplementos white label: creatina, whey protein, ômega 3, colágeno, pré-treino, termogênicos, vitaminas, hipercalóricos e mais — produzidos com a sua marca."
+  canonical="/produtos"
+  schema={{
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Portfólio de suplementos white label',
+    itemListElement: PRODUCTS.map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: p.name,
+      url: `${SITE.url}/produtos/${p.slug}`,
+    })),
+  }}
+>
+  <section class="section">
+    <div class="container-site">
+      <Breadcrumbs items={[{ label: 'Produtos' }]} />
+      <div class="mx-auto mt-8 max-w-2xl text-center">
+        <p class="eyebrow">
+          <Icon name="tag" class="h-3.5 w-3.5" />
+          Portfólio
+        </p>
+        <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+          Suplementos white label para a sua marca
+        </h1>
+        <p class="lead text-lg">
+          Mais de 120 produtos produzíveis com a sua marca. Comece pelas categorias mais
+          vendidas do mercado — cada uma com página própria, opções de formato e FAQ.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {PRODUCTS.map((p) => <ProductCard slug={p.slug} name={p.name} short={p.short} icon={p.icon} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container-site">
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="h2-section">Portfólio completo da indústria</h2>
+        <p class="lead">
+          Além das categorias acima, produzimos linhas inteiras para públicos e objetivos
+          específicos:
+        </p>
+      </div>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          EXTRA_PORTFOLIO.map((item) => (
+            <div class="card">
+              <span class="card-icon"><Icon name="leaf" class="h-6 w-6" /></span>
+              <h3 class="mt-4 font-bold text-slate-900">{item.name}</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-slate-600">{item.examples}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="mx-auto mt-10 max-w-2xl rounded-2xl border border-dashed border-brand-300 bg-white p-5 text-center text-sm leading-relaxed text-slate-700">
+        Tem uma formulação em mente que não está na lista?
+        <a href={SITE.contact.whatsapp} class="font-semibold text-brand-700 underline" rel="noopener" target="_blank">
+          Fale com a gente
+        </a>
+        — desenvolvemos projetos exclusivos sob demanda.
+      </p>
+    </div>
+  </section>
+
+  <CTASection
+    title="Escolheu os seus produtos? O próximo passo é a cotação."
+    description="Informe os produtos, formatos e quantidades e receba condições, prazos e o plano completo para lançar a sua marca."
+  />
+</BaseLayout>

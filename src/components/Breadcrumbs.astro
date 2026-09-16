@@ -1,0 +1,41 @@
+---
+/**
+ * Breadcrumbs acessíveis + schema BreadcrumbList (JSON-LD).
+ */
+import { SITE } from '../data/site';
+
+interface Crumb {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: Crumb[];
+}
+
+const { items } = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [{ label: 'Início', href: '/' }, ...items].map((item, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: item.label,
+    ...(item.href ? { item: new URL(item.href, SITE.url).href } : {}),
+  })),
+};
+---
+
+<nav class="breadcrumb" aria-label="Você está aqui">
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <a href="/">Início</a>
+  {
+    items.map((item) => (
+      <>
+        <span aria-hidden="true">/</span>
+        {item.href ? <a href={item.href}>{item.label}</a> : <span aria-current="page">{item.label}</span>}
+      </>
+    ))
+  }
+</nav>

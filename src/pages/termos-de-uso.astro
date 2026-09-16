@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
+---
+
+<BaseLayout
+  title="Termos de Uso"
+  description="Termos de uso do site da Marca Lab: condições de navegação, propriedade intelectual, cotações e limitação de responsabilidade."
+  canonical="/termos-de-uso"
+>
+  <section class="section">
+    <div class="container-site mx-auto max-w-3xl">
+      <h1 class="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">Termos de Uso</h1>
+      <p class="mt-3 text-sm text-slate-500">Última atualização: setembro de 2026</p>
+
+      <div class="prose-blog mt-8">
+        <p>
+          Bem-vindo ao site da <strong>{SITE.legalName}</strong> ("Marca Lab"). Ao acessar e
+          utilizar este site, você concorda com os termos abaixo.
+        </p>
+
+        <h2>1. Natureza do site</h2>
+        <p>
+          Este site tem caráter institucional e informativo. Os conteúdos do blog têm finalidade
+          educacional e não substituem orientação médica ou nutricional individual. Consulte um
+          profissional de saúde antes de consumir suplementos.
+        </p>
+
+        <h2>2. Cotações e pedidos</h2>
+        <ul>
+          <li>Cotações solicitadas pelos canais do site são gratuitas e sem compromisso;</li>
+          <li>Valores, prazos e condições informados em cotações são válidos para as condições descritas e por tempo limitado;</li>
+          <li>Pedidos de produção somente se concretizam mediante aceite formal e pagamento conforme condições comerciais acordadas.</li>
+        </ul>
+
+        <h2>3. Propriedade intelectual</h2>
+        <p>
+          Todo o conteúdo deste site — textos, identidade visual, layout e artigos — é
+          propriedade da Marca Lab ou licenciado por terceiros, protegido pela legislação de
+          direitos autorais. É proibida a reprodução total ou parcial sem autorização expressa.
+        </p>
+
+        <h2>4. Marcas de clientes</h2>
+        <p>
+          No modelo white label, os produtos produzidos para clientes são comercializados sob a
+          marca do próprio cliente, que responde pela sua estratégia comercial. A Marca Lab não
+          endossa nem participa das declarações comerciais feitas pelos clientes sobre seus
+          produtos.
+        </p>
+
+        <h2>5. Limitação de responsabilidade</h2>
+        <p>
+          A Marca Lab envida esforços para manter as informações do site precisas e atualizadas,
+          mas não garante ausência total de erros ou omissões. Informações regulatórias podem
+          mudar; sempre confirmamos as exigências vigentes no momento de cada projeto.
+        </p>
+
+        <h2>6. Links externos</h2>
+        <p>
+          O site pode conter links para sites de terceiros. Não nos responsabilizamos pelo
+          conteúdo ou pelas práticas de privacidade desses sites.
+        </p>
+
+        <h2>7. Legislação e foro</h2>
+        <p>
+          Estes termos são regidos pelas leis da República Federativa do Brasil. Fica eleito o
+          foro do domicílio da Marca Lab para dirimir eventuais controvérsias.
+        </p>
+
+        <h2>8. Contato</h2>
+        <p>
+          Dúvidas sobre estes termos:
+          <a href={`mailto:${SITE.contact.email}`}>{SITE.contact.email}</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

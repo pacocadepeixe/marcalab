@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CTASection from '../components/CTASection.astro';
+import FAQ from '../components/FAQ.astro';
+import Icon from '../components/Icon.astro';
+import { FAQ_HOME } from '../data/site';
+---
+
+<BaseLayout
+  title="Perguntas Frequentes — White Label de Suplementos"
+  description="Tire suas dúvidas sobre produzir suplementos com a sua marca: pedido mínimo, ANVISA, prazos, formulação exclusiva, custos e como funciona o white label na Marca Lab."
+  canonical="/faq"
+>
+  <section class="section">
+    <div class="container-site">
+      <Breadcrumbs items={[{ label: 'FAQ' }]} />
+      <div class="mx-auto mt-8 max-w-3xl text-center">
+        <p class="eyebrow">
+          <Icon name="doc" class="h-3.5 w-3.5" />
+          Dúvidas frequentes
+        </p>
+        <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+          Perguntas frequentes
+        </h1>
+        <p class="lead text-lg">
+          As respostas para o que todo empreendedor pergunta antes de lançar uma marca própria
+          de suplementos.
+        </p>
+      </div>
+      <div class="mx-auto mt-12 max-w-3xl">
+        <FAQ items={FAQ_HOME} title="" />
+        <p class="mt-8 rounded-2xl border border-dashed border-brand-300 bg-brand-50 p-5 text-center text-sm leading-relaxed text-slate-700">
+          Não encontrou a sua dúvida?
+          <a href="/contato" class="font-semibold text-brand-700 underline">Fale com a gente</a>
+          — respondemos em até 1 dia útil.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</BaseLayout>

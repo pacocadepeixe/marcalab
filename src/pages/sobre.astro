@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CTASection from '../components/CTASection.astro';
+import Icon from '../components/Icon.astro';
+import { SITE } from '../data/site';
+---
+
+<BaseLayout
+  title="Sobre a Marca Lab"
+  description="A Marca Lab é uma indústria de suplementos white label que produz creatina, whey protein, ômega 3, colágeno e +120 produtos com a marca de quem quer vender. Conheça nossa estrutura e diferenciais."
+  canonical="/sobre"
+  schema={{
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: 'Sobre a Marca Lab',
+    url: `${SITE.url}/sobre`,
+  }}
+>
+  <section class="section">
+    <div class="container-site">
+      <Breadcrumbs items={[{ label: 'Sobre' }]} />
+      <div class="mx-auto mt-8 max-w-3xl">
+        <p class="eyebrow">
+          <Icon name="users" class="h-3.5 w-3.5" />
+          Quem somos
+        </p>
+        <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+          A indústria por trás de marcas que estão nascendo
+        </h1>
+        <p class="lead text-lg">
+          A Marca Lab nasceu com um propósito direto: tornar o mercado de suplementos acessível
+          a quem tem audiência, conhecimento e vontade de empreender — mas não tem (nem precisa
+          ter) uma fábrica.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pb-16">
+    <div class="container-site grid gap-10 lg:grid-cols-2">
+      <div class="space-y-5 leading-relaxed text-slate-700">
+        <p>
+          Produzir um suplemento envolve muito mais do que misturar ingredientes: exige
+          matéria-prima rastreada, formulação equilibrada, rotulagem dentro das normas,
+          notificação nos órgãos competentes e controle de qualidade lote a lote. Para quem está
+          começando, montar essa operação do zero custa caro e demora.
+        </p>
+        <p>
+          É aí que entramos. Somos a <strong class="text-slate-900">indústria white label</strong> que
+          coloca tudo isso à disposição da sua marca: você escolhe os produtos, define a
+          identidade e vende — nós cuidamos da ciência, da produção e da regularização.
+        </p>
+        <p>
+          Nosso portfólio cobre as categorias mais vendidas do Brasil: creatina, whey protein,
+          ômega 3, colágeno, pré-treinos, termogênicos, vitaminas e minerais, hipercalóricos,
+          fitoterápicos, linha infantil e muito mais.
+        </p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="rounded-2xl bg-brand-700 p-6 text-white">
+          <Icon name="flask" class="h-8 w-8" />
+          <h2 class="mt-3 font-bold">Ciência primeiro</h2>
+          <p class="mt-2 text-sm leading-relaxed text-brand-100">
+            Formulações com dosagens que fazem sentido e ingredientes com laudo de análise.
+          </p>
+        </div>
+        <div class="rounded-2xl bg-accent-600 p-6 text-white">
+          <Icon name="shield" class="h-8 w-8" />
+          <h2 class="mt-3 font-bold">Transparência total</h2>
+          <p class="mt-2 text-sm leading-relaxed text-accent-50">
+            Prazos, custos e etapas comunicados com clareza — sem letra miúda.
+          </p>
+        </div>
+        <div class="rounded-2xl bg-slate-900 p-6 text-white">
+          <Icon name="chart" class="h-8 w-8" />
+          <h2 class="mt-3 font-bold">Foco no crescimento</h2>
+          <p class="mt-2 text-sm leading-relaxed text-slate-300">
+            Do primeiro lote de teste à reposição em escala, crescemos junto com a sua marca.
+          </p>
+        </div>
+        <div class="rounded-2xl bg-white p-6 ring-1 ring-slate-200">
+          <Icon name="tag" class="h-8 w-8 text-brand-700" />
+          <h2 class="mt-3 font-bold text-slate-900">Sua marca, sempre</h2>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600">
+            O produto é 100% seu. Nós ficamos nos bastidores — é assim que o white label funciona.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container-site mx-auto max-w-3xl text-center">
+      <h2 class="h2-section">Para quem a Marca Lab existe</h2>
+      <p class="lead">
+        Se você tem público e quer monetizar com produtos de verdade, o white label de
+        suplementos foi feito para você:
+      </p>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          [
+            { icon: 'users', title: 'Influenciadores', text: 'Transforme audiência em receita recorrente com produtos com a sua cara.' },
+            { icon: 'shield', title: 'Personal trainers', text: 'Recomende (e venda) o que você já indica hoje — agora com sua marca.' },
+            { icon: 'factory', title: 'Lojistas', text: 'Margin maior que a revenda: produza sua própria linha de suplementos.' },
+            { icon: 'leaf', title: 'Profissionais de saúde', text: 'Nutricionistas e farmacêuticos com linha própria e dosagens específicas.' },
+          ].map((item) => (
+            <div class="card text-left">
+              <span class="card-icon"><Icon name={item.icon} class="h-6 w-6" /></span>
+              <h3 class="mt-4 font-bold text-slate-900">{item.title}</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-slate-600">{item.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    title="Vamos construir a sua marca juntos?"
+    description="Conte para a gente o seu momento e o que você quer lançar. Nossa equipe responde com um plano, prazos e uma cotação sob medida — sem compromisso."
+  />
+</BaseLayout>

@@ -1,0 +1,26 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  slug: string;
+  name: string;
+  short: string;
+  icon: string;
+}
+
+const { slug, name, short, icon } = Astro.props;
+---
+
+<a href={`/produtos/${slug}`} class="card group flex flex-col gap-4">
+  <span class="card-icon">
+    <Icon name={icon} class="h-6 w-6" />
+  </span>
+  <div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-brand-700">{name}</h3>
+    <p class="mt-1.5 text-sm leading-relaxed text-slate-600">{short}</p>
+  </div>
+  <span class="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700">
+    Ver detalhes
+    <Icon name="arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-1" />
+  </span>
+</a>

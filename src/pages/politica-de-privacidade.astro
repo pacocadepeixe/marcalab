@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
+---
+
+<BaseLayout
+  title="Política de Privacidade"
+  description="Política de privacidade da Marca Lab: como coletamos, usamos, armazenamos e protegemos os dados dos visitantes e clientes do site."
+  canonical="/politica-de-privacidade"
+>
+  <section class="section">
+    <div class="container-site mx-auto max-w-3xl">
+      <h1 class="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+        Política de Privacidade
+      </h1>
+      <p class="mt-3 text-sm text-slate-500">Última atualização: setembro de 2026</p>
+
+      <div class="prose-blog mt-8">
+        <p>
+          Esta Política de Privacidade explica como a <strong>{SITE.legalName}</strong> ("Marca Lab",
+          "nós") coleta, usa e protege as informações dos visitantes deste site. Ao utilizar o
+          site, você concorda com as práticas descritas abaixo.
+        </p>
+
+        <h2>1. Quais dados coletamos</h2>
+        <ul>
+          <li><strong>Dados de contato</strong> fornecidos por você nos formulários: nome, e-mail, WhatsApp e mensagem;</li>
+          <li><strong>Dados de navegação</strong> anônimos (páginas visitadas, tempo de sessão, tipo de dispositivo), caso ferramentas de análise sejam utilizadas;</li>
+          <li><strong>Dados de comunicação</strong> quando você interage com nossos canais (WhatsApp, e-mail, redes sociais).</li>
+        </ul>
+
+        <h2>2. Como usamos os dados</h2>
+        <ul>
+          <li>Responder solicitações de cotação e dúvidas;</li>
+          <li>Enviar informações sobre serviços, prazos e produção;</li>
+          <li>Melhorar a experiência do site e o conteúdo publicado;</li>
+          <li>Cumprir obrigações legais e regulatórias.</li>
+        </ul>
+
+        <h2>3. Compartilhamento</h2>
+        <p>
+          Não vendemos, alugamos ou compartilhamos seus dados pessoais com terceiros para fins
+          comerciais. Podemos compartilhar informações quando exigido por lei ou com
+          prestadores de serviço essenciais (ex.: ferramentas de e-mail), sempre sob sigilo.
+        </p>
+
+        <h2>4. Cookies</h2>
+        <p>
+          O site pode utilizar cookies e tecnologias similares para funcionamento técnico e
+          medição de audiência. Você pode bloquear cookies nas configurações do seu navegador;
+          algumas funcionalidades podem deixar de funcionar.
+        </p>
+
+        <h2>5. Segurança e retenção</h2>
+        <p>
+          Adotamos medidas técnicas e organizacionais para proteger seus dados contra acesso
+          não autorizado. Mantemos as informações apenas pelo tempo necessário para as
+          finalidades descritas ou para cumprir obrigações legais.
+        </p>
+
+        <h2>6. Seus direitos (LGPD)</h2>
+        <p>
+          Nos termos da Lei nº 13.709/2018 (Lei Geral de Proteção de Dados), você pode solicitar
+          o acesso, a correção, a portabilidade ou a exclusão dos seus dados pessoais, além de
+          revogar consentimentos. Para isso, escreva para
+          <a href={`mailto:${SITE.contact.email}`}>{SITE.contact.email}</a>.
+        </p>
+
+        <h2>7. Alterações desta política</h2>
+        <p>
+          Esta política pode ser atualizada periodicamente. A versão vigente estará sempre
+          publicada nesta página.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

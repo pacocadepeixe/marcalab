@@ -1,0 +1,128 @@
+---
+import { SITE, NAV, PRODUCTS, BLOG_CATEGORIES } from '../data/site';
+import Icon from './Icon.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-slate-950 text-slate-300">
+  <div class="container-site grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
+    <div>
+      <a href="/" class="flex items-center gap-2.5">
+        <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white">
+          <Icon name="flask" class="h-5 w-5" />
+        </span>
+        <span class="text-lg font-bold tracking-tight text-white">
+          Marca<span class="text-brand-400">Lab</span>
+        </span>
+      </a>
+      <p class="mt-4 text-sm leading-relaxed text-slate-400">
+        Indústria de suplementos white label. Produzimos creatina, whey protein, ômega 3,
+        colágeno e muito mais com a sua marca — da formulação à entrega.
+      </p>
+      <div class="mt-5 flex gap-3">
+        <a
+          href={SITE.social.instagram}
+          class="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-900 text-slate-300 hover:bg-brand-600 hover:text-white"
+          aria-label="Instagram da Marca Lab"
+          rel="noopener"
+          target="_blank"
+        >
+          <Icon name="instagram" class="h-4 w-4" />
+        </a>
+        <a
+          href={SITE.social.linkedin}
+          class="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-900 text-slate-300 hover:bg-brand-600 hover:text-white"
+          aria-label="LinkedIn da Marca Lab"
+          rel="noopener"
+          target="_blank"
+        >
+          <Icon name="linkedin" class="h-4 w-4" />
+        </a>
+      </div>
+    </div>
+
+    <nav aria-label="Links do site">
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-white">Navegação</h2>
+      <ul class="mt-4 space-y-2.5 text-sm">
+        {
+          NAV.map((item) => (
+            <li>
+              <a href={item.href} class="text-slate-400 hover:text-white">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+        <li><a href="/contato" class="text-slate-400 hover:text-white">Contato</a></li>
+      </ul>
+    </nav>
+
+    <nav aria-label="Produtos white label">
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-white">Produtos</h2>
+      <ul class="mt-4 space-y-2.5 text-sm">
+        {
+          PRODUCTS.slice(0, 6).map((product) => (
+            <li>
+              <a href={`/produtos/${product.slug}`} class="text-slate-400 hover:text-white">
+                {product.name}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a href="/produtos" class="font-medium text-brand-400 hover:text-brand-300">
+            Ver portfólio completo →
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div>
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-white">Contato</h2>
+      <ul class="mt-4 space-y-3 text-sm">
+        <li>
+          <a
+            href={SITE.contact.whatsapp}
+            class="inline-flex items-center gap-2 text-slate-400 hover:text-white"
+            rel="noopener"
+            target="_blank"
+          >
+            <Icon name="whatsapp" class="h-4 w-4" />
+            {SITE.contact.whatsappDisplay}
+          </a>
+        </li>
+        <li>
+          <a href={`mailto:${SITE.contact.email}`} class="inline-flex items-center gap-2 text-slate-400 hover:text-white">
+            <Icon name="mail" class="h-4 w-4" />
+            {SITE.contact.email}
+          </a>
+        </li>
+      </ul>
+      <h2 class="mt-6 text-sm font-semibold uppercase tracking-wider text-white">Blog</h2>
+      <ul class="mt-4 space-y-2.5 text-sm">
+        {
+          Object.entries(BLOG_CATEGORIES).map(([slug, cat]) => (
+            <li>
+              <a href={`/blog/categoria/${slug}`} class="text-slate-400 hover:text-white">
+                {cat.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-slate-900">
+    <div
+      class="container-site flex flex-col items-center justify-between gap-3 py-6 text-xs text-slate-500 sm:flex-row"
+    >
+      <p>© {year} {SITE.legalName}. Todos os direitos reservados.</p>
+      <div class="flex gap-5">
+        <a href="/politica-de-privacidade" class="hover:text-slate-300">Política de Privacidade</a>
+        <a href="/termos-de-uso" class="hover:text-slate-300">Termos de Uso</a>
+      </div>
+    </div>
+  </div>
+</footer>

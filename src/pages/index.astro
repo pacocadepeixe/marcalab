@@ -1,0 +1,290 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import BlogCard from '../components/BlogCard.astro';
+import CTASection from '../components/CTASection.astro';
+import Icon from '../components/Icon.astro';
+import { SITE, PRODUCTS, EXTRA_PORTFOLIO, STATS, PROCESS_STEPS } from '../data/site';
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const homeSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Produção de suplementos white label',
+  provider: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+  areaServed: 'BR',
+  description:
+    'Indústria de suplementos white label: creatina, whey protein, ômega 3, colágeno, vitaminas e mais de 120 produtos produzidos com a marca do cliente.',
+  serviceType: 'White label / private label de suplementos alimentares',
+  url: SITE.url,
+};
+---
+
+<BaseLayout title={SITE.title} description={SITE.description} canonical="/" schema={homeSchema}>
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-brand-50 via-white to-white">
+    <div class="container-site grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-2 lg:py-28">
+      <div>
+        <p class="eyebrow">
+          <Icon name="flask" class="h-3.5 w-3.5" />
+          Indústria de suplementos white label
+        </p>
+        <h1 class="text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+          Suplementos com a <span class="text-brand-700">sua marca</span>, ciência da nossa.
+        </h1>
+        <p class="lead text-lg sm:text-xl">
+          A Marca Lab é a indústria por trás das marcas que estão crescendo: formulamos,
+          registramos, produzimos e entregamos creatina, whey protein, ômega 3, colágeno e mais
+          de 120 produtos — você só cuida de vender.
+        </p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a href={SITE.contact.whatsapp} class="btn-primary px-7! py-3.5! text-base!" rel="noopener" target="_blank">
+            <Icon name="whatsapp" class="h-5 w-5" />
+            Solicitar cotação gratuita
+          </a>
+          <a href="/produtos" class="btn-secondary px-7! py-3.5! text-base!">
+            Ver portfólio de produtos
+            <Icon name="arrow-right" class="h-4 w-4" />
+          </a>
+        </div>
+        <ul class="mt-8 grid gap-2.5 text-sm font-medium text-slate-600 sm:grid-cols-2">
+          <li class="flex items-center gap-2">
+            <Icon name="check" class="h-4 w-4 text-accent-600" /> Sem fábrica própria
+          </li>
+          <li class="flex items-center gap-2">
+            <Icon name="check" class="h-4 w-4 text-accent-600" /> Apoio na regularização
+          </li>
+          <li class="flex items-center gap-2">
+            <Icon name="check" class="h-4 w-4 text-accent-600" /> Rótulo com sua identidade
+          </li>
+          <li class="flex items-center gap-2">
+            <Icon name="check" class="h-4 w-4 text-accent-600" /> Envio para todo o Brasil
+          </li>
+        </ul>
+      </div>
+
+      <!-- Card visual -->
+      <div class="relative mx-auto w-full max-w-md lg:max-w-none">
+        <div class="absolute -inset-6 rounded-[2rem] bg-gradient-to-tr from-brand-100 via-accent-100 to-transparent blur-2xl" aria-hidden="true"></div>
+        <div class="relative rounded-3xl border border-slate-200 bg-white p-6 shadow-xl sm:p-8">
+          <div class="flex items-center gap-3 border-b border-slate-100 pb-5">
+            <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-700 text-white">
+              <Icon name="flask" class="h-6 w-6" />
+            </span>
+            <div>
+              <p class="text-sm font-semibold text-slate-900">Projeto white label</p>
+              <p class="text-xs text-slate-500">Do briefing à entrega</p>
+            </div>
+          </div>
+          <ol class="mt-5 space-y-4">
+            {
+              PROCESS_STEPS.slice(0, 4).map((step) => (
+                <li class="flex items-start gap-3.5">
+                  <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-50 text-xs font-bold text-brand-700 ring-1 ring-brand-100">
+                    {step.number}
+                  </span>
+                  <div>
+                    <p class="text-sm font-semibold text-slate-900">{step.title}</p>
+                    <p class="mt-0.5 text-xs leading-relaxed text-slate-500">{step.description}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ol>
+          <div class="mt-6 rounded-xl bg-accent-50 px-4 py-3 text-center text-sm font-semibold text-accent-800 ring-1 ring-accent-200">
+            Lote pronto para vender com a sua marca
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="border-y border-slate-200 bg-white">
+    <div class="container-site grid grid-cols-2 gap-8 py-10 sm:py-12 lg:grid-cols-4">
+      {
+        STATS.map((stat) => (
+          <div class="text-center">
+            <p class="text-3xl font-extrabold tracking-tight text-brand-700 sm:text-4xl">{stat.value}</p>
+            <p class="mt-1.5 text-sm font-medium text-slate-500">{stat.label}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- PRODUTOS DESTAQUE -->
+  <section class="section">
+    <div class="container-site">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">Portfólio</p>
+        <h2 class="h2-section">Os produtos que sua marca pode lançar</h2>
+        <p class="lead">
+          Categorias mais procuradas do mercado de suplementos — todas produzíveis com a sua
+          marca, na sua embalagem e com o seu rótulo.
+        </p>
+      </div>
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {PRODUCTS.map((p) => <ProductCard slug={p.slug} name={p.name} short={p.short} icon={p.icon} />)}
+      </div>
+      <div class="mt-10 rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-6 sm:p-8">
+        <h3 class="text-base font-bold text-slate-900">E não para por aí — a indústria também produz:</h3>
+        <ul class="mt-4 grid gap-x-8 gap-y-3 text-sm text-slate-600 sm:grid-cols-2 lg:grid-cols-4">
+          {
+            EXTRA_PORTFOLIO.map((item) => (
+              <li class="flex items-start gap-2">
+                <Icon name="check" class="mt-0.5 h-4 w-4 shrink-0 text-accent-600" />
+                <span>
+                  <strong class="font-semibold text-slate-800">{item.name}:</strong> {item.examples}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="mt-10 text-center">
+        <a href="/produtos" class="btn-secondary">
+          Ver todos os produtos em detalhe
+          <Icon name="arrow-right" class="h-4 w-4" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA (resumido) -->
+  <section class="section section-alt">
+    <div class="container-site">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">Como funciona</p>
+        <h2 class="h2-section">Sua marca no ar em 6 passos</h2>
+        <p class="lead">
+          Cuidamos de toda a parte técnica e regulatória para que você focue no que importa:
+        </p>
+      </div>
+      <ol class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          PROCESS_STEPS.map((step) => (
+            <li class="card">
+              <div class="flex items-center justify-between">
+                <span class="card-icon">
+                  <span class="text-sm font-extrabold">{step.number}</span>
+                </span>
+              </div>
+              <h3 class="mt-4 text-lg font-bold text-slate-900">{step.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-slate-600">{step.description}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="mt-10 text-center">
+        <a href="/como-funciona" class="btn-secondary">
+          Entender o processo completo
+          <Icon name="arrow-right" class="h-4 w-4" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFERENCIAIS -->
+  <section class="section">
+    <div class="container-site grid items-center gap-12 lg:grid-cols-2">
+      <div>
+        <p class="eyebrow">Por que a Marca Lab</p>
+        <h2 class="h2-section">Uma indústria parceira, não apenas um fornecedor</h2>
+        <p class="lead">
+          Quem lança marca própria precisa de mais do que um pote com logotipo: precisa de
+          qualidade constante, transparência e agilidade. É isso que entregamos em cada lote.
+        </p>
+        <div class="mt-8 space-y-5">
+          <div class="flex gap-4">
+            <span class="card-icon shrink-0"><Icon name="shield" class="h-6 w-6" /></span>
+            <div>
+              <h3 class="font-bold text-slate-900">Matéria-prima com laudo</h3>
+              <p class="mt-1 text-sm leading-relaxed text-slate-600">
+                Ingredientes rastreados e laudos de análise por lote — pureza e dosagem
+                declaradas no rótulo são as mesmas do produto final.
+              </p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <span class="card-icon shrink-0"><Icon name="doc" class="h-6 w-6" /></span>
+            <div>
+              <h3 class="font-bold text-slate-900">Apoio regulatório completo</h3>
+              <p class="mt-1 text-sm leading-relaxed text-slate-600">
+                Orientamos rotulagem conforme a legislação vigente e os trâmites de
+                notificação/registro para você vender com segurança jurídica.
+              </p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <span class="card-icon shrink-0"><Icon name="clock" class="h-6 w-6" /></span>
+            <div>
+              <h3 class="font-bold text-slate-900">Prazos que cabem no seu planejamento</h3>
+              <p class="mt-1 text-sm leading-relaxed text-slate-600">
+                Ciclo médio de 30 a 60 dias do briefing à entrega, com comunicação clara em
+                cada etapa — você nunca fica no escuro.
+              </p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <span class="card-icon shrink-0"><Icon name="truck" class="h-6 w-6" /></span>
+            <div>
+              <h3 class="font-bold text-slate-900">Reposição fácil</h3>
+              <p class="mt-1 text-sm leading-relaxed text-slate-600">
+                Logística para todo o Brasil com rastreio e política de reposição ágil para o
+                seu estoque nunca travar as vendas.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-3xl bg-slate-900 p-8 sm:p-10">
+        <h3 class="text-xl font-bold text-white sm:text-2xl">Feito para quem está começando — e para quem já vende</h3>
+        <p class="mt-4 leading-relaxed text-slate-300">
+          Influenciadores, lojistas, nutras, academias e empreendedores usam o white label para
+          lançar marcas de suplementos sem investir em fábrica. A Marca Lab atende do primeiro
+          lote ao crescimento em escala.
+        </p>
+        <ul class="mt-6 space-y-3 text-sm text-slate-300">
+          <li class="flex items-center gap-2.5"><Icon name="check" class="h-4 w-4 text-accent-400" /> Influenciadores e personal trainers</li>
+          <li class="flex items-center gap-2.5"><Icon name="check" class="h-4 w-4 text-accent-400" /> Lojas de suplementos e e-commerces</li>
+          <li class="flex items-center gap-2.5"><Icon name="check" class="h-4 w-4 text-accent-400" /> Nutricionistas e profissionais de saúde</li>
+          <li class="flex items-center gap-2.5"><Icon name="check" class="h-4 w-4 text-accent-400" /> Academias e estúdios</li>
+        </ul>
+        <a href={SITE.contact.whatsapp} class="btn-accent mt-8 w-full" rel="noopener" target="_blank">
+          <Icon name="whatsapp" class="h-5 w-5" />
+          Começar com uma cotação
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section class="section section-alt">
+    <div class="container-site">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">Blog</p>
+        <h2 class="h2-section">Conteúdo para crescer a sua marca</h2>
+        <p class="lead">
+          Guias sobre produtos, negócio, marketing e mercado de suplementos — o conhecimento
+          que você precisa antes de investir.
+        </p>
+      </div>
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post) => <BlogCard post={post} />)}
+      </div>
+      <div class="mt-10 text-center">
+        <a href="/blog" class="btn-secondary">
+          Ver todos os artigos
+          <Icon name="arrow-right" class="h-4 w-4" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</BaseLayout>

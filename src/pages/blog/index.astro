@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import CTASection from '../../components/CTASection.astro';
+import Icon from '../../components/Icon.astro';
+import { BLOG_CATEGORIES } from '../../data/site';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const featured = posts.filter((p) => p.data.featured).slice(0, 1)[0] ?? posts[0];
+const rest = posts.filter((p) => p.id !== featured.id);
+---
+
+<BaseLayout
+  title="Blog da Marca Lab — Guias sobre White Label e Suplementos"
+  description="Guias completos sobre white label de suplementos: custos, margens, ANVISA, marketing, mercado e ciência dos produtos. Conteúdo para quem quer lançar a própria marca."
+  canonical="/blog"
+>
+  <section class="section">
+    <div class="container-site">
+      <Breadcrumbs items={[{ label: 'Blog' }]} />
+      <div class="mx-auto mt-8 max-w-2xl text-center">
+        <p class="eyebrow">
+          <Icon name="doc" class="h-3.5 w-3.5" />
+          Blog
+        </p>
+        <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+          Tudo para lançar a sua marca de suplementos
+        </h1>
+        <p class="lead text-lg">
+          Negócio, produtos, marketing e mercado — o conhecimento que falta entre a vontade de
+          empreender e o produto na prateleira.
+        </p>
+      </div>
+
+      <!-- Categorias -->
+      <nav class="mx-auto mt-10 flex max-w-4xl flex-wrap justify-center gap-2" aria-label="Categorias do blog">
+        {
+          Object.entries(BLOG_CATEGORIES).map(([slug, cat]) => (
+            <a
+              href={`/blog/categoria/${slug}`}
+              class="rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-700"
+            >
+              {cat.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <!-- Destaque -->
+      {
+        featured && (
+          <a
+            href={`/blog/${featured.id}`}
+            class="card group mt-12 grid gap-6 p-6 sm:p-10 lg:grid-cols-3"
+          >
+            <div class="lg:col-span-2">
+              <div class="flex items-center gap-3 text-xs">
+                <span class="inline-flex rounded-full bg-brand-700 px-2.5 py-1 font-semibold text-white">
+                  Artigo em destaque
+                </span>
+                <span class="inline-flex rounded-full bg-accent-50 px-2.5 py-1 font-semibold text-accent-800 ring-1 ring-accent-200">
+                  {BLOG_CATEGORIES[featured.data.category].label}
+                </span>
+              </div>
+              <h2 class="mt-4 text-2xl font-bold tracking-tight text-slate-900 group-hover:text-brand-700 sm:text-3xl">
+                {featured.data.title}
+              </h2>
+              <p class="mt-3 leading-relaxed text-slate-600">{featured.data.description}</p>
+            </div>
+            <div class="flex items-end">
+              <span class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700">
+                Ler artigo completo
+                <Icon name="arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </span>
+            </div>
+          </a>
+        )
+      }
+
+      <!-- Grade de artigos -->
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {rest.map((post) => <BlogCard post={post} />)}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    title="Aprendeu o suficiente? O próximo passo é a cotação."
+    description="Transforme conhecimento em produto: solicite uma cotação gratuita e descubra como é fácil lançar a sua marca de suplementos com a Marca Lab."
+  />
+</BaseLayout>
