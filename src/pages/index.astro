@@ -44,8 +44,8 @@ const homeSchema = {
           da formulação à entrega. Você cuida das vendas. A gente cuida do resto.
         </p>
         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-          <a href={SITE.contact.whatsapp} class="btn-primary px-7! py-3.5! text-base!" rel="noopener" target="_blank">
-            <Icon name="whatsapp" class="h-5 w-5" />
+          <a href="#cotacao" class="btn-primary px-7! py-3.5! text-base!">
+            <Icon name="sparkle" class="h-5 w-5" />
             Quero lançar minha marca
           </a>
           <a href="/produtos" class="btn-secondary px-7! py-3.5! text-base!">
@@ -53,6 +53,17 @@ const homeSchema = {
             <Icon name="arrow-right" class="h-4 w-4" />
           </a>
         </div>
+        <p class="mt-4 text-sm text-slate-500">
+          Prefere direto? Chama no WhatsApp
+          <a
+            href={SITE.contact.whatsapp}
+            class="font-semibold text-accent-700 underline underline-offset-2 hover:text-accent-800"
+            rel="noopener"
+            target="_blank"
+          >
+            {SITE.contact.whatsappDisplay}
+          </a>
+        </p>
         <ul class="mt-8 grid gap-2.5 text-sm font-medium text-slate-600 sm:grid-cols-2">
           <li class="flex items-center gap-2">
             <Icon name="check" class="h-4 w-4 text-accent-600" /> Produto pronto em 30–60 dias
@@ -177,7 +188,7 @@ const homeSchema = {
   </section>
 
   <!-- COTAÇÃO GUIADA (formulário multi-etapas) -->
-  <section class="section" id="cotacao">
+  <section class="section scroll-mt-24" id="cotacao">
     <div class="container-site">
       <div class="mx-auto max-w-2xl text-center">
         <p class="eyebrow">
@@ -236,9 +247,9 @@ const homeSchema = {
         </div>
       </div>
       <div class="mt-10 text-center">
-        <a href={SITE.contact.whatsapp} class="btn-secondary" rel="noopener" target="_blank">
-          <Icon name="whatsapp" class="h-4 w-4" />
+        <a href="#cotacao" class="btn-secondary">
           Descobrir qual é a melhor para mim
+          <Icon name="arrow-right" class="h-4 w-4" />
         </a>
       </div>
     </div>
@@ -430,9 +441,9 @@ const homeSchema = {
             letra miúda.
           </p>
         </div>
-        <a href={SITE.contact.whatsapp} class="btn-accent mt-6 w-full" rel="noopener" target="_blank">
-          <Icon name="whatsapp" class="h-5 w-5" />
-          Dar o primeiro passo no WhatsApp
+        <a href="#cotacao" class="btn-accent mt-6 w-full">
+          Dar o primeiro passo agora
+          <Icon name="arrow-right" class="h-5 w-5" />
         </a>
       </div>
     </div>
