@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { BLOG_CATEGORIES } from '../data/site';
+import { BLOG_CATEGORIES, IMAGES } from '../data/site';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -13,26 +13,37 @@ const dateFormatted = pubDate.toLocaleDateString('pt-BR', {
   month: 'short',
   year: 'numeric',
 });
+const categoryLabel = BLOG_CATEGORIES[category].label;
 ---
 
 <a
   href={`/blog/${post.id}`}
-  class="card group flex h-full flex-col gap-3 p-6"
+  class="card group flex h-full flex-col gap-3 !p-0"
 >
-  <div class="flex items-center gap-3 text-xs">
-    <span class="inline-flex rounded-full bg-accent-50 px-2.5 py-1 font-semibold text-accent-800 ring-1 ring-accent-200">
-      {BLOG_CATEGORIES[category].label}
+  <img
+    src={IMAGES.blog[category]}
+    alt={`Ilustração da categoria ${categoryLabel}`}
+    class="aspect-[3/2] w-full rounded-t-2xl object-cover"
+    width="1200"
+    height="800"
+    loading="lazy"
+  />
+  <div class="flex flex-1 flex-col gap-3 px-6 pb-6">
+    <div class="flex items-center gap-3 text-xs">
+      <span class="inline-flex rounded-full bg-accent-50 px-2.5 py-1 font-semibold text-accent-800 ring-1 ring-accent-200">
+        {categoryLabel}
+      </span>
+      <time datetime={pubDate.toISOString()} class="font-medium text-slate-500">
+        {dateFormatted}
+      </time>
+    </div>
+    <h3 class="text-lg font-bold leading-snug text-slate-900 group-hover:text-brand-700">
+      {title}
+    </h3>
+    <p class="line-clamp-3 text-sm leading-relaxed text-slate-600">{description}</p>
+    <span class="mt-auto inline-flex items-center gap-1.5 pt-2 text-sm font-semibold text-brand-700">
+      Ler artigo
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
     </span>
-    <time datetime={pubDate.toISOString()} class="font-medium text-slate-500">
-      {dateFormatted}
-    </time>
   </div>
-  <h3 class="text-lg font-bold leading-snug text-slate-900 group-hover:text-brand-700">
-    {title}
-  </h3>
-  <p class="line-clamp-3 text-sm leading-relaxed text-slate-600">{description}</p>
-  <span class="mt-auto inline-flex items-center gap-1.5 pt-2 text-sm font-semibold text-brand-700">
-    Ler artigo
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
-  </span>
 </a>

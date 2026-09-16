@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CTASection from '../components/CTASection.astro';
 import Icon from '../components/Icon.astro';
-import { SITE } from '../data/site';
+import { SITE, IMAGES } from '../data/site';
 ---
 
 <BaseLayout
@@ -34,6 +34,18 @@ import { SITE } from '../data/site';
           ter) uma fábrica.
         </p>
       </div>
+
+      <!-- Foto principal da estrutura -->
+      <figure class="mt-10 overflow-hidden rounded-3xl shadow-lg">
+        <img
+          src={IMAGES.envase}
+          alt="Envase industrial de cápsulas de suplementos na produção white label"
+          class="aspect-[21/9] w-full object-cover"
+          width="1200"
+          height="514"
+          loading="lazy"
+        />
+      </figure>
     </div>
   </section>
 
@@ -56,6 +68,34 @@ import { SITE } from '../data/site';
           ômega 3, colágeno, pré-treinos, termogênicos, vitaminas e minerais, hipercalóricos,
           fitoterápicos, linha infantil e muito mais.
         </p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <figure class="overflow-hidden rounded-2xl">
+          <img
+            src={IMAGES.laboratorio}
+            alt="Cientista realizando análise de controle de qualidade em laboratório"
+            class="aspect-[4/3] w-full object-cover"
+            width="1400"
+            height="1050"
+            loading="lazy"
+          />
+          <figcaption class="bg-white px-4 py-3 text-xs font-medium text-slate-600">
+            Controle de qualidade com laudo por lote
+          </figcaption>
+        </figure>
+        <figure class="overflow-hidden rounded-2xl">
+          <img
+            src={IMAGES.logistica}
+            alt="Expedição de pedidos no armazém da indústria"
+            class="aspect-[4/3] w-full object-cover"
+            width="1200"
+            height="900"
+            loading="lazy"
+          />
+          <figcaption class="bg-white px-4 py-3 text-xs font-medium text-slate-600">
+            Logística própria com rastreio para todo o Brasil
+          </figcaption>
+        </figure>
       </div>
       <div class="grid gap-4 sm:grid-cols-2">
         <div class="rounded-2xl bg-brand-700 p-6 text-white">

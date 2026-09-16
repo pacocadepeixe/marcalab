@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CTASection from '../components/CTASection.astro';
 import Icon from '../components/Icon.astro';
-import { PROCESS_STEPS } from '../data/site';
+import { PROCESS_STEPS, IMAGES } from '../data/site';
 ---
 
 <BaseLayout
@@ -48,6 +48,20 @@ import { PROCESS_STEPS } from '../data/site';
           ))
         }
       </ol>
+
+      <figure class="mx-auto mt-12 max-w-3xl overflow-hidden rounded-3xl shadow-md">
+        <img
+          src={IMAGES.producao}
+          alt="Linha de produção industrial onde os suplementos white label são fabricados"
+          class="aspect-[21/9] w-full object-cover"
+          width="1600"
+          height="686"
+          loading="lazy"
+        />
+        <figcaption class="rounded-b-3xl bg-white px-5 py-3 text-center text-xs text-slate-500 ring-1 ring-slate-200">
+          Produção em ambiente industrial com boas práticas de fabricação
+        </figcaption>
+      </figure>
 
       <div class="mx-auto mt-12 grid max-w-3xl gap-6 sm:grid-cols-3">
         <div class="rounded-2xl bg-brand-50 p-6 text-center ring-1 ring-brand-100">

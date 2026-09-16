@@ -184,6 +184,62 @@ export const STATS = [
   { value: '100%', label: 'rastreabilidade de lotes' },
 ];
 
+/**
+ * Imagens do site (fotos reais — substitua pelas fotos da sua indústria
+ * quando tiver: basta trocar os arquivos em /public/images mantendo os nomes).
+ * Origem e licenças documentadas em /CREDITS.md
+ */
+export const IMAGES = {
+  laboratorio: '/images/estrutura-laboratorio.webp',
+  producao: '/images/estrutura-producao.webp',
+  envase: '/images/estrutura-envase.webp',
+  logistica: '/images/estrutura-logistica.webp',
+  produto: '/images/produto-capsulas.webp',
+  produtoPo: '/images/produto-shake.webp',
+  blog: {
+    negocios: '/images/blog-negocios.webp',
+    produtos: '/images/blog-produtos.webp',
+    marketing: '/images/blog-marketing.webp',
+    mercado: '/images/blog-produtos.webp',
+  } as Record<BlogCategory, string>,
+};
+
+/** Foto do aside por página de produto (pós usam shake; cápsulas/tabletes usam frasco) */
+export const PRODUCT_IMAGE: Record<string, string> = {
+  'creatina-white-label': IMAGES.produtoPo,
+  'whey-protein-white-label': IMAGES.produtoPo,
+  'colageno-white-label': IMAGES.produtoPo,
+  'pre-treino-white-label': IMAGES.produtoPo,
+  'hipercalorico-white-label': IMAGES.produtoPo,
+  'omega-3-white-label': IMAGES.produto,
+  'termogenico-white-label': IMAGES.produto,
+  'vitaminas-minerais-white-label': IMAGES.produto,
+};
+
+/** Barra de confiança exibida abaixo do hero */
+export const TRUST_BADGES = [
+  {
+    icon: 'doc',
+    title: 'Laudo por lote',
+    text: 'Cada lote produzido sai com laudo de análise da matéria-prima utilizada.',
+  },
+  {
+    icon: 'factory',
+    title: 'Boas Práticas de Fabricação',
+    text: 'Produção em ambiente adequado, com procedimentos padronizados de qualidade.',
+  },
+  {
+    icon: 'check',
+    title: 'Rastreabilidade total',
+    text: 'Da matéria-prima ao envio: número de lote em todos os produtos fabricados.',
+  },
+  {
+    icon: 'shield',
+    title: 'Suporte regulatório',
+    text: 'Orientação em rotulagem, notificação e regularização da sua marca.',
+  },
+];
+
 export const PROCESS_STEPS = [
   {
     number: '01',

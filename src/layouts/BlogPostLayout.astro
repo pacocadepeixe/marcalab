@@ -5,7 +5,7 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FAQ from '../components/FAQ.astro';
 import CTASection from '../components/CTASection.astro';
 import BlogCard from '../components/BlogCard.astro';
-import { SITE, BLOG_CATEGORIES, type BlogCategory } from '../data/site';
+import { SITE, BLOG_CATEGORIES, IMAGES, type BlogCategory } from '../data/site';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -102,6 +102,17 @@ const schemas = [articleSchema, ...(faqSchema ? [faqSchema] : [])];
         </h1>
         <p class="mt-5 text-lg leading-relaxed text-slate-600">{description}</p>
       </header>
+
+      <figure class="mx-auto mt-8 max-w-3xl overflow-hidden rounded-3xl shadow-md">
+        <img
+          src={IMAGES.blog[category as BlogCategory]}
+          alt={`Imagem da categoria ${BLOG_CATEGORIES[category as BlogCategory].label}`}
+          class="aspect-[3/1] w-full object-cover"
+          width="1200"
+          height="400"
+          loading="eager"
+        />
+      </figure>
 
       <div class="mx-auto mt-10 max-w-3xl">
         {

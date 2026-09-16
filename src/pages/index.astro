@@ -5,7 +5,7 @@ import ProductCard from '../components/ProductCard.astro';
 import BlogCard from '../components/BlogCard.astro';
 import CTASection from '../components/CTASection.astro';
 import Icon from '../components/Icon.astro';
-import { SITE, PRODUCTS, EXTRA_PORTFOLIO, STATS, PROCESS_STEPS } from '../data/site';
+import { SITE, PRODUCTS, EXTRA_PORTFOLIO, STATS, PROCESS_STEPS, IMAGES, TRUST_BADGES } from '../data/site';
 
 const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -67,39 +67,58 @@ const homeSchema = {
         </ul>
       </div>
 
-      <!-- Card visual -->
+      <!-- Foto real + card de processo -->
       <div class="relative mx-auto w-full max-w-md lg:max-w-none">
-        <div class="absolute -inset-6 rounded-[2rem] bg-gradient-to-tr from-brand-100 via-accent-100 to-transparent blur-2xl" aria-hidden="true"></div>
-        <div class="relative rounded-3xl border border-slate-200 bg-white p-6 shadow-xl sm:p-8">
-          <div class="flex items-center gap-3 border-b border-slate-100 pb-5">
-            <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-700 text-white">
-              <Icon name="flask" class="h-6 w-6" />
+        <div class="absolute -inset-4 rounded-[2rem] bg-gradient-to-tr from-brand-100 via-accent-100 to-transparent blur-2xl" aria-hidden="true"></div>
+        <figure class="relative">
+          <img
+            src={IMAGES.laboratorio}
+            alt="Analista em laboratório de controle de qualidade analisando amostras de matéria-prima de suplementos"
+            class="aspect-[4/3] w-full rounded-3xl border border-white object-cover shadow-xl"
+            width="1400"
+            height="1050"
+            loading="eager"
+            fetchpriority="high"
+          />
+          <figcaption class="sr-only">Controle de qualidade em laboratório na produção de suplementos</figcaption>
+          <!-- Card flutuante: passos resumidos -->
+          <div class="relative z-10 mx-4 -mt-14 rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-xl backdrop-blur sm:mx-6">
+            <p class="text-xs font-bold uppercase tracking-wider text-brand-700">Do briefing à entrega</p>
+            <ol class="mt-3 space-y-2.5">
+              {
+                PROCESS_STEPS.slice(0, 4).map((step, i) => (
+                  <li class="flex items-center gap-3 text-sm">
+                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-50 text-[11px] font-bold text-brand-700 ring-1 ring-brand-100">
+                      {i + 1}
+                    </span>
+                    <span class={i < 3 ? 'font-medium text-slate-900' : 'font-medium text-slate-900'}>{step.title}</span>
+                    {i === 3 && <span class="ml-auto rounded-full bg-accent-50 px-2 py-0.5 text-[11px] font-semibold text-accent-800 ring-1 ring-accent-200">→ entrega</span>}
+                  </li>
+                ))
+              }
+            </ol>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- BARRA DE CONFIANÇA -->
+  <section class="border-b border-slate-200 bg-white">
+    <div class="container-site grid gap-8 py-10 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        TRUST_BADGES.map((badge) => (
+          <div class="flex gap-3.5">
+            <span class="card-icon shrink-0 !h-11 !w-11">
+              <Icon name={badge.icon} class="h-5 w-5" />
             </span>
             <div>
-              <p class="text-sm font-semibold text-slate-900">Projeto white label</p>
-              <p class="text-xs text-slate-500">Do briefing à entrega</p>
+              <p class="text-sm font-bold text-slate-900">{badge.title}</p>
+              <p class="mt-1 text-xs leading-relaxed text-slate-600">{badge.text}</p>
             </div>
           </div>
-          <ol class="mt-5 space-y-4">
-            {
-              PROCESS_STEPS.slice(0, 4).map((step) => (
-                <li class="flex items-start gap-3.5">
-                  <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-50 text-xs font-bold text-brand-700 ring-1 ring-brand-100">
-                    {step.number}
-                  </span>
-                  <div>
-                    <p class="text-sm font-semibold text-slate-900">{step.title}</p>
-                    <p class="mt-0.5 text-xs leading-relaxed text-slate-500">{step.description}</p>
-                  </div>
-                </li>
-              ))
-            }
-          </ol>
-          <div class="mt-6 rounded-xl bg-accent-50 px-4 py-3 text-center text-sm font-semibold text-accent-800 ring-1 ring-accent-200">
-            Lote pronto para vender com a sua marca
-          </div>
-        </div>
-      </div>
+        ))
+      }
     </div>
   </section>
 
@@ -185,6 +204,81 @@ const homeSchema = {
           Entender o processo completo
           <Icon name="arrow-right" class="h-4 w-4" />
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESTRUTURA (fotos reais) -->
+  <section class="section">
+    <div class="container-site">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">
+          <Icon name="factory" class="h-3.5 w-3.5" />
+          Nossa estrutura
+        </p>
+        <h2 class="h2-section">Uma indústria de verdade, por trás da sua marca</h2>
+        <p class="lead">
+          Produção profissional não é promessa — é processo. Conheça as etapas que
+          garantem a qualidade de cada lote que sai com o seu nome.
+        </p>
+      </div>
+      <div class="mt-12 grid gap-6 sm:grid-cols-2">
+        <figure class="group relative overflow-hidden rounded-3xl">
+          <img
+            src={IMAGES.laboratorio}
+            alt="Profissional analisando amostras em laboratório de controle de qualidade"
+            class="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            width="1400"
+            height="1050"
+            loading="lazy"
+          />
+          <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent p-5 pt-12">
+            <p class="text-sm font-bold text-white">Controle de qualidade</p>
+            <p class="mt-0.5 text-xs text-slate-200">Análise de matéria-prima e laudo por lote produzido</p>
+          </figcaption>
+        </figure>
+        <figure class="group relative overflow-hidden rounded-3xl">
+          <img
+            src={IMAGES.envase}
+            alt="Cápsulas de suplementos no processo de envase industrial"
+            class="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            width="1200"
+            height="900"
+            loading="lazy"
+          />
+          <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent p-5 pt-12">
+            <p class="text-sm font-bold text-white">Produção e envase</p>
+            <p class="mt-0.5 text-xs text-slate-200">Pós, cápsulas e tabletes com acabamento premium</p>
+          </figcaption>
+        </figure>
+        <figure class="group relative overflow-hidden rounded-3xl">
+          <img
+            src={IMAGES.producao}
+            alt="Linha de produção industrial de suplementos alimentares"
+            class="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            width="1600"
+            height="1200"
+            loading="lazy"
+          />
+          <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent p-5 pt-12">
+            <p class="text-sm font-bold text-white">Análise e desenvolvimento</p>
+            <p class="mt-0.5 text-xs text-slate-200">Formulação e testes conduzidos por equipe técnica</p>
+          </figcaption>
+        </figure>
+        <figure class="group relative overflow-hidden rounded-3xl">
+          <img
+            src={IMAGES.logistica}
+            alt="Armazém de expedição com produtos prontos para envio"
+            class="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            width="1200"
+            height="900"
+            loading="lazy"
+          />
+          <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent p-5 pt-12">
+            <p class="text-sm font-bold text-white">Logística e expedição</p>
+            <p class="mt-0.5 text-xs text-slate-200">Envio para todo o Brasil com rastreio</p>
+          </figcaption>
+        </figure>
       </div>
     </div>
   </section>
