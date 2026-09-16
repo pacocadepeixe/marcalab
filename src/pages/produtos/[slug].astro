@@ -93,14 +93,14 @@ const otherProducts = PRODUCTS.filter((p) => p.slug !== product.slug).slice(0, 4
           <figure class="overflow-hidden rounded-3xl border border-slate-200 bg-slate-50 shadow-sm">
             <img
               src={PRODUCT_IMAGE[product.slug] ?? IMAGES.produto}
-              alt={`Mockup do produto ${product.name.replace(' White Label', '')} com rótulo SUA MARCA AQUI`}
-              class="mx-auto h-72 w-auto object-contain p-6 sm:h-80"
-              width="576"
-              height="640"
+              alt={`Linha completa de embalagens de suplementos com rótulos ADICIONE SUA MARCA — produza ${product.name.replace(' White Label', '')} com a sua marca`}
+              class="aspect-square w-full object-cover"
+              width="1024"
+              height="1024"
               loading="lazy"
             />
             <figcaption class="bg-white px-5 py-3 text-xs text-slate-500">
-              Ilustração do formato — o rótulo segue 100% a identidade da sua marca
+              Linha completa de formatos — do pote ao sachê, o rótulo segue 100% a identidade da sua marca
             </figcaption>
           </figure>
           <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">

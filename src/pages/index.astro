@@ -5,6 +5,7 @@ import ProductCard from '../components/ProductCard.astro';
 import BlogCard from '../components/BlogCard.astro';
 import CTASection from '../components/CTASection.astro';
 import Icon from '../components/Icon.astro';
+import QuoteForm from '../components/QuoteForm.astro';
 import { SITE, PRODUCTS, EXTRA_PORTFOLIO, STATS, PROCESS_STEPS, IMAGES, TRUST_BADGES, START_PRICE } from '../data/site';
 
 const posts = (await getCollection('blog'))
@@ -68,20 +69,20 @@ const homeSchema = {
         </ul>
       </div>
 
-      <!-- Foto real + card de processo -->
+      <!-- Linha de produtos "ADICIONE SUA MARCA" + card de processo -->
       <div class="relative mx-auto w-full max-w-md lg:max-w-none">
         <div class="absolute -inset-4 rounded-[2rem] bg-gradient-to-tr from-brand-100 via-accent-100 to-transparent blur-2xl" aria-hidden="true"></div>
         <figure class="relative">
           <img
-            src={IMAGES.laboratorio}
-            alt="Encapsuladeira industrial em aço inoxidável para produção de suplementos em cápsulas"
-            class="aspect-[4/3] w-full rounded-3xl border border-white object-cover shadow-xl"
-            width="1400"
-            height="1050"
+            src={IMAGES.mockupLinha}
+            alt="Linha completa de embalagens de suplementos com tampa azul e rótulo escrito ADICIONE SUA MARCA: pote de whey protein, pote de creatina, sachê de colágeno e frascos de cápsulas"
+            class="aspect-square w-full rounded-3xl border border-white object-cover shadow-xl"
+            width="1024"
+            height="1024"
             loading="eager"
             fetchpriority="high"
           />
-          <figcaption class="sr-only">Encapsuladeira industrial na produção de suplementos white label</figcaption>
+          <figcaption class="sr-only">Linha completa de embalagens prontas para levar a sua marca</figcaption>
           <!-- Card flutuante: passos resumidos -->
           <div class="relative z-10 mx-4 -mt-14 rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-xl backdrop-blur sm:mx-6">
             <p class="text-xs font-bold uppercase tracking-wider text-brand-700">Do briefing à entrega</p>
@@ -175,63 +176,23 @@ const homeSchema = {
     </div>
   </section>
 
-  <!-- EMBALAGENS COM SUA MARCA (mockups) -->
-  <section class="section">
+  <!-- COTAÇÃO GUIADA (formulário multi-etapas) -->
+  <section class="section" id="cotacao">
     <div class="container-site">
       <div class="mx-auto max-w-2xl text-center">
         <p class="eyebrow">
-          <Icon name="tag" class="h-3.5 w-3.5" />
-          Sua marca na prateleira
+          <Icon name="whatsapp" class="h-3.5 w-3.5" />
+          Cotação guiada · 1 minuto
         </p>
-        <h2 class="h2-section">É assim que o seu produto fica pronto para vender</h2>
+        <h2 class="h2-section">Responda 5 perguntas e receba a sua proposta</h2>
         <p class="lead">
-          Pó, cápsulas ou sachês: o rótulo segue 100% a identidade da sua marca. Ilustrações dos
-          formatos mais vendidos — sua arte, nossa produção.
+          Sem compromisso: conte o seu momento, escolha os produtos e receba no WhatsApp uma
+          cotação sob medida — o primeiro lote sai a partir de
+          <strong class="font-semibold text-slate-900">{START_PRICE}</strong>.
         </p>
       </div>
-      <div class="mt-12 grid gap-6 sm:grid-cols-3">
-        <figure class="rounded-3xl bg-slate-50 p-8 text-center ring-1 ring-slate-100">
-          <img
-            src={IMAGES.mockupPote}
-            alt="Mockup de pote de suplemento em pó com rótulo escrito SUA MARCA AQUI"
-            class="mx-auto h-72 w-auto object-contain"
-            width="576"
-            height="720"
-            loading="lazy"
-          />
-          <figcaption class="mt-4">
-            <p class="font-bold text-slate-900">Potes de pó</p>
-            <p class="mt-1 text-sm text-slate-600">Creatina, whey, colágeno, pré-treino e mais</p>
-          </figcaption>
-        </figure>
-        <figure class="rounded-3xl bg-slate-50 p-8 text-center ring-1 ring-slate-100">
-          <img
-            src={IMAGES.mockupFrasco}
-            alt="Mockup de frasco de cápsulas com rótulo escrito SUA MARCA AQUI"
-            class="mx-auto h-72 w-auto object-contain"
-            width="504"
-            height="648"
-            loading="lazy"
-          />
-          <figcaption class="mt-4">
-            <p class="font-bold text-slate-900">Frascos de cápsulas</p>
-            <p class="mt-1 text-sm text-slate-600">Ômega 3, vitaminas, termogênicos e blends</p>
-          </figcaption>
-        </figure>
-        <figure class="rounded-3xl bg-slate-50 p-8 text-center ring-1 ring-slate-100">
-          <img
-            src={IMAGES.mockupSache}
-            alt="Mockup de sachê individual com rótulo escrito SUA MARCA AQUI"
-            class="mx-auto h-72 w-auto object-contain"
-            width="504"
-            height="648"
-            loading="lazy"
-          />
-          <figcaption class="mt-4">
-            <p class="font-bold text-slate-900">Sachês individuais</p>
-            <p class="mt-1 text-sm text-slate-600">Conveniência para amostras e venda avulsa</p>
-          </figcaption>
-        </figure>
+      <div class="mx-auto mt-12 max-w-2xl">
+        <QuoteForm />
       </div>
     </div>
   </section>
@@ -363,15 +324,15 @@ const homeSchema = {
         <figure class="group relative overflow-hidden rounded-3xl">
           <img
             src={IMAGES.producao}
-            alt="Equipamento industrial de aço inoxidável para preparo e mistura de pós"
+            alt="Silos e tanques de aço inoxidável para armazenamento de insumos da produção"
             class="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
             width="1200"
             height="900"
             loading="lazy"
           />
           <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent p-5 pt-12">
-            <p class="text-sm font-bold text-white">Preparo de pós e blends</p>
-            <p class="mt-0.5 text-xs text-slate-200">Mistura homogênea de pós, granulados e sabores</p>
+            <p class="text-sm font-bold text-white">Silos de insumos</p>
+            <p class="mt-0.5 text-xs text-slate-200">Matéria-prima rastreada e segregada por lote</p>
           </figcaption>
         </figure>
         <figure class="group relative overflow-hidden rounded-3xl">
