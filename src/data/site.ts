@@ -27,9 +27,13 @@ export const SITE = {
   contact: {
     email: 'contato@marcalab.com.br',
     phone: '',
-    /** Link direto do WhatsApp (com DDI + DDD + número, sem símbolos) */
-    whatsapp: 'https://wa.me/5511999999999',
-    whatsappDisplay: '(11) 99999-9999',
+    /**
+     * Link direto do WhatsApp com mensagem pré-preenchida
+     * (DDI + DDD + número, sem símbolos). Troque apenas o número se mudar.
+     */
+    whatsapp:
+      'https://wa.me/5511975736730?text=Ol%C3%A1!%20Quero%20produzir%20suplementos%20com%20a%20minha%20marca.%20Vim%20pelo%20site%20da%20Marca%20Lab.',
+    whatsappDisplay: '(11) 97573-6730',
   },
   social: {
     instagram: 'https://instagram.com/marcalab',
@@ -176,12 +180,15 @@ export const EXTRA_PORTFOLIO = [
   { name: 'Bebidas Funcionais', examples: 'Shots detox, bebidas vitamínicas e blends em pó para diluir' },
 ];
 
+/** Gancho de preço usado nos CTAs (lote inicial) */
+export const START_PRICE = 'R$ 5 mil';
+
 /** Números exibidos na home (ajuste conforme a realidade da empresa) */
 export const STATS = [
+  { value: 'R$ 5 mil', label: 'para lançar sua primeira linha' },
+  { value: '30 dias', label: 'do briefing ao produto pronto' },
   { value: '+120', label: 'produtos no portfólio' },
-  { value: '99,9%', label: 'pureza mínima em ingredientes-chave' },
-  { value: '30 dias', label: 'prazo médio de produção' },
-  { value: '100%', label: 'rastreabilidade de lotes' },
+  { value: '2x–3x', label: 'margem típica sobre o custo' },
 ];
 
 /**
@@ -280,6 +287,11 @@ export const PROCESS_STEPS = [
 ];
 
 export const FAQ_HOME = [
+  {
+    question: 'Quanto preciso investir para começar?',
+    answer:
+      'Seu primeiro lote pode sair a partir de R$ 5 mil, dependendo dos produtos, formatos e quantidades escolhidos. Esse investimento cobre a produção com a sua marca — e nossa equipe ajuda a dimensionar o mix ideal para o seu orçamento e o seu momento.',
+  },
   {
     question: 'O que é suplemento white label?',
     answer:

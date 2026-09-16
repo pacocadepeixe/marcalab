@@ -5,7 +5,7 @@ import ProductCard from '../components/ProductCard.astro';
 import BlogCard from '../components/BlogCard.astro';
 import CTASection from '../components/CTASection.astro';
 import Icon from '../components/Icon.astro';
-import { SITE, PRODUCTS, EXTRA_PORTFOLIO, STATS, PROCESS_STEPS, IMAGES, TRUST_BADGES } from '../data/site';
+import { SITE, PRODUCTS, EXTRA_PORTFOLIO, STATS, PROCESS_STEPS, IMAGES, TRUST_BADGES, START_PRICE } from '../data/site';
 
 const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -31,38 +31,39 @@ const homeSchema = {
       <div>
         <p class="eyebrow">
           <Icon name="flask" class="h-3.5 w-3.5" />
-          Indústria de suplementos white label
+          Indústria white label · Seu primeiro lote a partir de {START_PRICE}
         </p>
         <h1 class="text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-          Suplementos com a <span class="text-brand-700">sua marca</span>, ciência da nossa.
+          Pare de revender a marca dos outros.
+          <span class="text-brand-700">Lance a sua.</span>
         </h1>
         <p class="lead text-lg sm:text-xl">
-          A Marca Lab é a indústria por trás das marcas que estão crescendo: formulamos,
-          registramos, produzimos e entregamos creatina, whey protein, ômega 3, colágeno e mais
-          de 120 produtos — você só cuida de vender.
+          A Marca Lab é a indústria que produz creatina, whey protein, ômega 3 e mais de 120
+          suplementos com <strong class="font-semibold text-slate-900">a sua marca no rótulo</strong> —
+          da formulação à entrega. Você cuida das vendas. A gente cuida do resto.
         </p>
         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
           <a href={SITE.contact.whatsapp} class="btn-primary px-7! py-3.5! text-base!" rel="noopener" target="_blank">
             <Icon name="whatsapp" class="h-5 w-5" />
-            Solicitar cotação gratuita
+            Quero lançar minha marca
           </a>
           <a href="/produtos" class="btn-secondary px-7! py-3.5! text-base!">
-            Ver portfólio de produtos
+            Ver o que produzimos
             <Icon name="arrow-right" class="h-4 w-4" />
           </a>
         </div>
         <ul class="mt-8 grid gap-2.5 text-sm font-medium text-slate-600 sm:grid-cols-2">
           <li class="flex items-center gap-2">
-            <Icon name="check" class="h-4 w-4 text-accent-600" /> Sem fábrica própria
+            <Icon name="check" class="h-4 w-4 text-accent-600" /> Produto pronto em 30–60 dias
           </li>
           <li class="flex items-center gap-2">
-            <Icon name="check" class="h-4 w-4 text-accent-600" /> Apoio na regularização
+            <Icon name="check" class="h-4 w-4 text-accent-600" /> Laudo de qualidade por lote
           </li>
           <li class="flex items-center gap-2">
-            <Icon name="check" class="h-4 w-4 text-accent-600" /> Rótulo com sua identidade
+            <Icon name="check" class="h-4 w-4 text-accent-600" /> Margens de 2x a 3x sobre o custo
           </li>
           <li class="flex items-center gap-2">
-            <Icon name="check" class="h-4 w-4 text-accent-600" /> Envio para todo o Brasil
+            <Icon name="check" class="h-4 w-4 text-accent-600" /> Zero fábrica, zero dor de cabeça
           </li>
         </ul>
       </div>
@@ -141,10 +142,10 @@ const homeSchema = {
     <div class="container-site">
       <div class="mx-auto max-w-2xl text-center">
         <p class="eyebrow">Portfólio</p>
-        <h2 class="h2-section">Os produtos que sua marca pode lançar</h2>
+        <h2 class="h2-section">Produtos que vendem todo mês — com o seu nome no rótulo</h2>
         <p class="lead">
-          Categorias mais procuradas do mercado de suplementos — todas produzíveis com a sua
-          marca, na sua embalagem e com o seu rótulo.
+          Suplemento é recompra: o cliente que gosta compra de novo todo mês. Comece pelas
+          categorias mais procuradas do Brasil, todas produzíveis com a sua marca.
         </p>
       </div>
       <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -179,9 +180,9 @@ const homeSchema = {
     <div class="container-site">
       <div class="mx-auto max-w-2xl text-center">
         <p class="eyebrow">Como funciona</p>
-        <h2 class="h2-section">Sua marca no ar em 6 passos</h2>
+        <h2 class="h2-section">Do briefing ao produto pronto em 6 passos</h2>
         <p class="lead">
-          Cuidamos de toda a parte técnica e regulatória para que você focue no que importa:
+          Você não precisa entender de formulação, rotulagem nem burocracia. É só isso:
         </p>
       </div>
       <ol class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -288,60 +289,64 @@ const homeSchema = {
     <div class="container-site grid items-center gap-12 lg:grid-cols-2">
       <div>
         <p class="eyebrow">Por que a Marca Lab</p>
-        <h2 class="h2-section">Uma indústria parceira, não apenas um fornecedor</h2>
+        <h2 class="h2-section">Revender dá margem apertada. Marca própria dá patrimônio.</h2>
         <p class="lead">
-          Quem lança marca própria precisa de mais do que um pote com logotipo: precisa de
-          qualidade constante, transparência e agilidade. É isso que entregamos em cada lote.
+          Quem revende marcas grandes disputa preço com centenas de lojas. Quem tem marca própria
+          define o preço, constrói fidelidade e cria um ativo que cresce a cada lote. A Marca Lab
+          existe para colocar essa diferença no seu bolso.
         </p>
         <div class="mt-8 space-y-5">
           <div class="flex gap-4">
             <span class="card-icon shrink-0"><Icon name="shield" class="h-6 w-6" /></span>
             <div>
-              <h3 class="font-bold text-slate-900">Matéria-prima com laudo</h3>
+              <h3 class="font-bold text-slate-900">Qualidade que você pode prometer</h3>
               <p class="mt-1 text-sm leading-relaxed text-slate-600">
-                Ingredientes rastreados e laudos de análise por lote — pureza e dosagem
-                declaradas no rótulo são as mesmas do produto final.
+                Matéria-prima rastreada e laudo de análise por lote. O que está no rótulo é o que
+                está no pote — e o seu nome é o que está em jogo.
               </p>
             </div>
           </div>
           <div class="flex gap-4">
             <span class="card-icon shrink-0"><Icon name="doc" class="h-6 w-6" /></span>
             <div>
-              <h3 class="font-bold text-slate-900">Apoio regulatório completo</h3>
+              <h3 class="font-bold text-slate-900">Burocracia? Com a gente</h3>
               <p class="mt-1 text-sm leading-relaxed text-slate-600">
-                Orientamos rotulagem conforme a legislação vigente e os trâmites de
-                notificação/registro para você vender com segurança jurídica.
+                Rotulagem dentro das normas, orientação em notificação e regularização. Você
+                vende com segurança jurídica desde o primeiro lote.
               </p>
             </div>
           </div>
           <div class="flex gap-4">
             <span class="card-icon shrink-0"><Icon name="clock" class="h-6 w-6" /></span>
             <div>
-              <h3 class="font-bold text-slate-900">Prazos que cabem no seu planejamento</h3>
+              <h3 class="font-bold text-slate-900">Prazo que cabe no seu planejamento</h3>
               <p class="mt-1 text-sm leading-relaxed text-slate-600">
-                Ciclo médio de 30 a 60 dias do briefing à entrega, com comunicação clara em
-                cada etapa — você nunca fica no escuro.
+                Ciclo médio de 30 a 60 dias com comunicação clara em cada etapa — para você
+                planejar lançamento, estoque e campanhas sem surpresa.
               </p>
             </div>
           </div>
           <div class="flex gap-4">
             <span class="card-icon shrink-0"><Icon name="truck" class="h-6 w-6" /></span>
             <div>
-              <h3 class="font-bold text-slate-900">Reposição fácil</h3>
+              <h3 class="font-bold text-slate-900">Reposição que não trava suas vendas</h3>
               <p class="mt-1 text-sm leading-relaxed text-slate-600">
-                Logística para todo o Brasil com rastreio e política de reposição ágil para o
-                seu estoque nunca travar as vendas.
+                Envio para todo o Brasil com rastreio e reposição ágil. Clientes seus nunca
+                ouvem "acabou o estoque".
               </p>
             </div>
           </div>
         </div>
       </div>
       <div class="rounded-3xl bg-slate-900 p-8 sm:p-10">
-        <h3 class="text-xl font-bold text-white sm:text-2xl">Feito para quem está começando — e para quem já vende</h3>
+        <p class="eyebrow !bg-white/10 !text-white !ring-white/20">Para quem é</p>
+        <h3 class="mt-4 text-xl font-bold text-white sm:text-2xl">
+          Se você tem audiência, clientela ou autoridade… falta só o produto
+        </h3>
         <p class="mt-4 leading-relaxed text-slate-300">
-          Influenciadores, lojistas, nutras, academias e empreendedores usam o white label para
-          lançar marcas de suplementos sem investir em fábrica. A Marca Lab atende do primeiro
-          lote ao crescimento em escala.
+          Influenciadores, personal trainers, nutras, lojistas e academias usam o white label
+          para transformar recomendação em receita recorrente — com margem de marca própria, não
+          comissão de revenda. Do primeiro lote de teste à escala.
         </p>
         <ul class="mt-6 space-y-3 text-sm text-slate-300">
           <li class="flex items-center gap-2.5"><Icon name="check" class="h-4 w-4 text-accent-400" /> Influenciadores e personal trainers</li>
@@ -349,9 +354,16 @@ const homeSchema = {
           <li class="flex items-center gap-2.5"><Icon name="check" class="h-4 w-4 text-accent-400" /> Nutricionistas e profissionais de saúde</li>
           <li class="flex items-center gap-2.5"><Icon name="check" class="h-4 w-4 text-accent-400" /> Academias e estúdios</li>
         </ul>
-        <a href={SITE.contact.whatsapp} class="btn-accent mt-8 w-full" rel="noopener" target="_blank">
+        <div class="mt-8 rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
+          <p class="text-sm leading-relaxed text-slate-300">
+            <strong class="font-semibold text-white">Comece pequeno, comece agora:</strong> o
+            primeiro lote sai a partir de {START_PRICE}. Sem fábrica, sem CNPJ gigante, sem
+            letra miúda.
+          </p>
+        </div>
+        <a href={SITE.contact.whatsapp} class="btn-accent mt-6 w-full" rel="noopener" target="_blank">
           <Icon name="whatsapp" class="h-5 w-5" />
-          Começar com uma cotação
+          Dar o primeiro passo no WhatsApp
         </a>
       </div>
     </div>

@@ -2,7 +2,7 @@
 /**
  * Seção CTA padrão usada ao final das páginas (funil de cotação).
  */
-import { SITE } from '../data/site';
+import { SITE, START_PRICE } from '../data/site';
 import Icon from './Icon.astro';
 
 interface Props {
@@ -11,8 +11,8 @@ interface Props {
 }
 
 const {
-  title = 'Pronto para lançar a sua marca de suplementos?',
-  description = 'Solicite uma cotação gratuita: informe os produtos, quantidades e formatos e nossa equipe responde com condições, prazos e todo o suporte para você começar.',
+  title = 'Sua marca pode estar à venda em 30 dias.',
+  description = `Comece com um lote a partir de ${START_PRICE} e deixe produção, laudos e burocracia com a gente. Você foca no que gera dinheiro: audiência e vendas. Resposta em minutos, no WhatsApp.`,
 } = Astro.props;
 ---
 
@@ -23,14 +23,14 @@ const {
     <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
       <a href={SITE.contact.whatsapp} class="btn-accent px-7! py-3.5! text-base!" rel="noopener" target="_blank">
         <Icon name="whatsapp" class="h-5 w-5" />
-        Falar no WhatsApp
+        Quero minha marca no rótulo
       </a>
-      <a href="/contato" class="btn-outline-light px-7! py-3.5! text-base!">
-        Solicitar cotação
+      <a href="/produtos" class="btn-outline-light px-7! py-3.5! text-base!">
+        Ver os produtos
       </a>
     </div>
     <p class="mt-6 text-sm text-brand-200">
-      Atendimento em horário comercial · Resposta em até 1 dia útil
+      Primeiro lote a partir de {START_PRICE} · Atendimento em horário comercial
     </p>
   </div>
 </section>

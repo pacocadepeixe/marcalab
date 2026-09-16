@@ -5,7 +5,7 @@ import FAQ from '../../components/FAQ.astro';
 import CTASection from '../../components/CTASection.astro';
 import Icon from '../../components/Icon.astro';
 import ProductCard from '../../components/ProductCard.astro';
-import { PRODUCTS, SITE, IMAGES, PRODUCT_IMAGE } from '../../data/site';
+import { PRODUCTS, SITE, IMAGES, PRODUCT_IMAGE, START_PRICE } from '../../data/site';
 import { PRODUCT_CONTENT } from '../../data/productContent';
 
 export function getStaticPaths() {
@@ -130,13 +130,16 @@ const otherProducts = PRODUCTS.filter((p) => p.slug !== product.slug).slice(0, 4
             </ul>
             <a
               href={SITE.contact.whatsapp}
-              class="btn-primary mt-8 w-full"
+              class="btn-primary mt-6 w-full"
               rel="noopener"
               target="_blank"
             >
               <Icon name="whatsapp" class="h-5 w-5" />
-              Cotar {product.name.replace(' White Label', '')}
+              Cotar com a minha marca
             </a>
+            <p class="mt-3 text-center text-xs text-slate-500">
+              Lote inicial a partir de <strong class="font-semibold text-slate-700">{START_PRICE}</strong> · resposta rápida no WhatsApp
+            </p>
           </div>
         </aside>
       </div>

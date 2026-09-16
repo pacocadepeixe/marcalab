@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CTASection from '../components/CTASection.astro';
 import Icon from '../components/Icon.astro';
-import { PROCESS_STEPS, IMAGES } from '../data/site';
+import { PROCESS_STEPS, IMAGES, START_PRICE } from '../data/site';
 ---
 
 <BaseLayout
@@ -23,8 +23,9 @@ import { PROCESS_STEPS, IMAGES } from '../data/site';
           Como funciona produzir com a sua marca
         </h1>
         <p class="lead text-lg sm:text-xl">
-          Do primeiro contato ao produto pronto para vender, o caminho é claro e acompanhado.
-          Veja o que acontece em cada etapa — e o que precisamos de você.
+          Do primeiro "oi" ao produto pronto para vender, o caminho é curto e acompanhado —
+          <strong class="font-semibold text-slate-900">a partir de {START_PRICE}</strong> e em 30–60 dias.
+          Veja o que acontece em cada etapa.
         </p>
       </div>
     </div>
