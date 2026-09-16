@@ -175,6 +175,114 @@ const homeSchema = {
     </div>
   </section>
 
+  <!-- EMBALAGENS COM SUA MARCA (mockups) -->
+  <section class="section">
+    <div class="container-site">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">
+          <Icon name="tag" class="h-3.5 w-3.5" />
+          Sua marca na prateleira
+        </p>
+        <h2 class="h2-section">É assim que o seu produto fica pronto para vender</h2>
+        <p class="lead">
+          Pó, cápsulas ou sachês: o rótulo segue 100% a identidade da sua marca. Ilustrações dos
+          formatos mais vendidos — sua arte, nossa produção.
+        </p>
+      </div>
+      <div class="mt-12 grid gap-6 sm:grid-cols-3">
+        <figure class="rounded-3xl bg-slate-50 p-8 text-center ring-1 ring-slate-100">
+          <img
+            src={IMAGES.mockupPote}
+            alt="Mockup de pote de suplemento em pó com rótulo escrito SUA MARCA AQUI"
+            class="mx-auto h-72 w-auto object-contain"
+            width="576"
+            height="720"
+            loading="lazy"
+          />
+          <figcaption class="mt-4">
+            <p class="font-bold text-slate-900">Potes de pó</p>
+            <p class="mt-1 text-sm text-slate-600">Creatina, whey, colágeno, pré-treino e mais</p>
+          </figcaption>
+        </figure>
+        <figure class="rounded-3xl bg-slate-50 p-8 text-center ring-1 ring-slate-100">
+          <img
+            src={IMAGES.mockupFrasco}
+            alt="Mockup de frasco de cápsulas com rótulo escrito SUA MARCA AQUI"
+            class="mx-auto h-72 w-auto object-contain"
+            width="504"
+            height="648"
+            loading="lazy"
+          />
+          <figcaption class="mt-4">
+            <p class="font-bold text-slate-900">Frascos de cápsulas</p>
+            <p class="mt-1 text-sm text-slate-600">Ômega 3, vitaminas, termogênicos e blends</p>
+          </figcaption>
+        </figure>
+        <figure class="rounded-3xl bg-slate-50 p-8 text-center ring-1 ring-slate-100">
+          <img
+            src={IMAGES.mockupSache}
+            alt="Mockup de sachê individual com rótulo escrito SUA MARCA AQUI"
+            class="mx-auto h-72 w-auto object-contain"
+            width="504"
+            height="648"
+            loading="lazy"
+          />
+          <figcaption class="mt-4">
+            <p class="font-bold text-slate-900">Sachês individuais</p>
+            <p class="mt-1 text-sm text-slate-600">Conveniência para amostras e venda avulsa</p>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- DUAS FORMAS DE COMEÇAR -->
+  <section class="section section-alt">
+    <div class="container-site">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">Por onde começar</p>
+        <h2 class="h2-section">Duas formas de lançar — escolha a sua</h2>
+        <p class="lead">
+          Do primeiro lote de teste à linha completa: o caminho depende do seu momento.
+        </p>
+      </div>
+      <div class="mt-12 grid gap-6 lg:grid-cols-2">
+        <div class="card sm:p-8">
+          <p class="eyebrow !bg-accent-50 !text-accent-800 !ring-accent-200">Mais rápido</p>
+          <h3 class="mt-4 text-xl font-bold text-slate-900">Portfólio pronto</h3>
+          <p class="mt-3 text-sm leading-relaxed text-slate-600">
+            Escolha produtos e sabores já validados da nossa cartela e personalize só o rótulo.
+            Menor custo, menor prazo — ideal para validar a marca e as primeiras vendas.
+          </p>
+          <ul class="mt-5 space-y-2.5 text-sm text-slate-600">
+            <li class="flex gap-2.5"><Icon name="check" class="mt-0.5 h-4 w-4 shrink-0 text-accent-600" /> Lançamento em semanas</li>
+            <li class="flex gap-2.5"><Icon name="check" class="mt-0.5 h-4 w-4 shrink-0 text-accent-600" /> Investimento inicial menor</li>
+            <li class="flex gap-2.5"><Icon name="check" class="mt-0.5 h-4 w-4 shrink-0 text-accent-600" /> Rótulo 100% com a sua identidade</li>
+          </ul>
+        </div>
+        <div class="card sm:p-8">
+          <p class="eyebrow">Diferenciado</p>
+          <h3 class="mt-4 text-xl font-bold text-slate-900">Fórmula exclusiva</h3>
+          <p class="mt-3 text-sm leading-relaxed text-slate-600">
+            Desenvolvemos a formulação sob medida: dosagens, blend de ingredientes e sabores que
+            só a sua marca tem. O produto certo para quem quer se destacar no mercado.
+          </p>
+          <ul class="mt-5 space-y-2.5 text-sm text-slate-600">
+            <li class="flex gap-2.5"><Icon name="check" class="mt-0.5 h-4 w-4 shrink-0 text-brand-600" /> Exclusividade de fórmula</li>
+            <li class="flex gap-2.5"><Icon name="check" class="mt-0.5 h-4 w-4 shrink-0 text-brand-600" /> Posicionamento premium</li>
+            <li class="flex gap-2.5"><Icon name="check" class="mt-0.5 h-4 w-4 shrink-0 text-brand-600" /> Desenvolvimento com equipe técnica</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-10 text-center">
+        <a href={SITE.contact.whatsapp} class="btn-secondary" rel="noopener" target="_blank">
+          <Icon name="whatsapp" class="h-4 w-4" />
+          Descobrir qual é a melhor para mim
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- COMO FUNCIONA (resumido) -->
   <section class="section section-alt">
     <div class="container-site">

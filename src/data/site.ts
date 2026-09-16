@@ -203,6 +203,10 @@ export const IMAGES = {
   logistica: '/images/estrutura-logistica.webp',
   produto: '/images/produto-capsulas.webp',
   produtoPo: '/images/produto-shake.webp',
+  /** Mockups vetoriais "SUA MARCA AQUI" (criação própria) */
+  mockupPote: '/images/mockup-pote.webp',
+  mockupFrasco: '/images/mockup-frasco.webp',
+  mockupSache: '/images/mockup-sache.webp',
   blog: {
     negocios: '/images/blog-negocios.webp',
     produtos: '/images/blog-produtos.webp',
@@ -211,16 +215,16 @@ export const IMAGES = {
   } as Record<BlogCategory, string>,
 };
 
-/** Foto do aside por página de produto (pós usam shake; cápsulas/tabletes usam frasco) */
+/** Foto do aside por página de produto (mockups "SUA MARCA AQUI") */
 export const PRODUCT_IMAGE: Record<string, string> = {
-  'creatina-white-label': IMAGES.produtoPo,
-  'whey-protein-white-label': IMAGES.produtoPo,
-  'colageno-white-label': IMAGES.produtoPo,
-  'pre-treino-white-label': IMAGES.produtoPo,
-  'hipercalorico-white-label': IMAGES.produtoPo,
-  'omega-3-white-label': IMAGES.produto,
-  'termogenico-white-label': IMAGES.produto,
-  'vitaminas-minerais-white-label': IMAGES.produto,
+  'creatina-white-label': IMAGES.mockupPote,
+  'whey-protein-white-label': IMAGES.mockupPote,
+  'colageno-white-label': IMAGES.mockupSache,
+  'pre-treino-white-label': IMAGES.mockupPote,
+  'hipercalorico-white-label': IMAGES.mockupPote,
+  'omega-3-white-label': IMAGES.mockupFrasco,
+  'termogenico-white-label': IMAGES.mockupFrasco,
+  'vitaminas-minerais-white-label': IMAGES.mockupFrasco,
 };
 
 /** Barra de confiança exibida abaixo do hero */
