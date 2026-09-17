@@ -21,22 +21,22 @@ import Icon from './Icon.astro';
     aria-hidden="true"
   >
     <div class="flex max-h-[80vh] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-slate-200">
-      <!-- Cabeçalho estilo WhatsApp -->
-      <div class="flex items-center gap-3 bg-[#075E54] px-4 py-3.5">
-        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/15 text-white ring-1 ring-white/25">
+      <!-- Cabeçalho (branco) -->
+      <div class="flex items-center gap-3 border-b border-slate-200 bg-white px-4 py-3.5">
+        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-700 ring-1 ring-brand-100">
           <Icon name="flask" class="h-5 w-5" />
         </span>
         <div class="min-w-0 flex-1">
-          <p class="truncate text-sm font-bold text-white" id="wa-popup-title">Marca Lab — Suplementos White Label</p>
-          <p class="mt-0.5 flex items-center gap-1.5 text-xs text-emerald-100">
-            <span class="h-1.5 w-1.5 rounded-full bg-emerald-300"></span>
+          <p class="truncate text-sm font-bold text-slate-900" id="wa-popup-title">Marca Lab — Suplementos White Label</p>
+          <p class="mt-0.5 flex items-center gap-1.5 text-xs text-slate-500">
+            <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
             <span id="wa-status">Online · responde em minutos</span>
           </p>
         </div>
         <button
           type="button"
           id="wa-close"
-          class="flex h-8 w-8 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+          class="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700"
           aria-label="Fechar"
         >
           <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
@@ -44,7 +44,7 @@ import Icon from './Icon.astro';
       </div>
 
       <!-- Área do chat -->
-      <div id="wa-chat" class="min-h-[220px] flex-1 space-y-2 overflow-y-auto bg-[#ECE5DD] px-3 py-4" aria-live="polite"></div>
+      <div id="wa-chat" class="min-h-[220px] flex-1 space-y-2 overflow-y-auto bg-white px-3 py-4" aria-live="polite"></div>
 
       <!-- Área de resposta (troca conforme a etapa) -->
       <div id="wa-inputs" class="border-t border-slate-200 bg-white p-3">
@@ -183,11 +183,12 @@ import Icon from './Icon.astro';
     width: fit-content;
     border-radius: 0.875rem 0.875rem 0.875rem 0.25rem;
     background: white;
+    border: 1px solid var(--color-slate-200);
     padding: 0.5rem 0.75rem;
     font-size: 0.8125rem;
     line-height: 1.45;
     color: var(--color-slate-800);
-    box-shadow: 0 1px 1px rgb(0 0 0 / 0.08);
+    box-shadow: 0 1px 1px rgb(0 0 0 / 0.04);
     animation: wa-appear 0.18s ease-out;
   }
   .wa-bubble-user {
