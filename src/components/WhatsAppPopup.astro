@@ -235,6 +235,7 @@ import Icon from './Icon.astro';
 
 <script>
   const WHATSAPP_NUMBER = '5511975736730';
+  const AUTO_ABRIR_MS = 30_000; // abre sozinho após 30s na página (1× por sessão)
 
   const widget = document.getElementById('wa-widget');
   const popup = document.getElementById('wa-popup');
@@ -318,6 +319,21 @@ import Icon from './Icon.astro';
     showStep(etapaAtual + 1);
   }
 
+  function jaViuNestaSessao(): boolean {
+    try {
+      return sessionStorage.getItem('marcalab-wa-visto') === '1';
+    } catch {
+      return false;
+    }
+  }
+  function marcarVisto() {
+    try {
+      sessionStorage.setItem('marcalab-wa-visto', '1');
+    } catch {
+      /* modo privado — segue sem persistir */
+    }
+  }
+
   function setOpen(open: boolean) {
     isOpen = open;
     if (!popup || !toggle) return;
@@ -330,6 +346,7 @@ import Icon from './Icon.astro';
     iconClose?.classList.toggle('hidden', !open);
     if (open) {
       ping?.remove();
+      marcarVisto();
       void comecarConversa();
     }
   }
@@ -417,4 +434,23 @@ import Icon from './Icon.astro';
       setTimeout(() => setOpen(false), 1600);
     });
   });
+
+  // ---- Abertura automática (padrão Ekoncepto) ----
+  // Após AUTO_ABRIR_MS na página, o chat abre sozinho — mas apenas:
+  // 1× por sessão, se a pessoa ainda não abriu, e com a aba visível.
+  if (!jaViuNestaSessao()) {
+    setTimeout(() => {
+      if (isOpen || jaViuNestaSessao()) return;
+      if (document.hidden) {
+        // aba em segundo plano: espera ficar visível para não "perder" a abertura
+        const aoFicarVisivel = () => {
+          document.removeEventListener('visibilitychange', aoFicarVisivel);
+          if (!isOpen && !jaViuNestaSessao()) setOpen(true);
+        };
+        document.addEventListener('visibilitychange', aoFicarVisivel);
+        return;
+      }
+      setOpen(true);
+    }, AUTO_ABRIR_MS);
+  }
 </script>
