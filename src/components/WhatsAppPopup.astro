@@ -23,9 +23,7 @@ import Icon from './Icon.astro';
     <div class="flex max-h-[80vh] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-slate-200">
       <!-- Cabeçalho (branco) -->
       <div class="flex items-center gap-3 border-b border-slate-200 bg-white px-4 py-3.5">
-        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-700 ring-1 ring-brand-100">
-          <Icon name="flask" class="h-5 w-5" />
-        </span>
+        <img src="/images/logo.webp" alt="" width="40" height="40" class="h-10 w-10 shrink-0 rounded-full" />
         <div class="min-w-0 flex-1">
           <p class="truncate text-sm font-bold text-slate-900" id="wa-popup-title">Marca Lab — Suplementos White Label</p>
           <p class="mt-0.5 flex items-center gap-1.5 text-xs text-slate-500">
@@ -235,8 +233,23 @@ import Icon from './Icon.astro';
 </style>
 
 <script>
+  import { LEADS } from '../data/site';
+
   const WHATSAPP_NUMBER = '5511975736730';
   const AUTO_ABRIR_MS = 30_000; // abre sozinho após 30s na página (1× por sessão)
+
+  /** Envia o lead direto para o Google Sheets (se configurado). */
+  function enviarLead(d: Record<string, string>) {
+    if (!LEADS.webAppUrl) return;
+    const url = LEADS.webAppUrl + (LEADS.webAppUrl.includes('?') ? '&' : '?') + 'token=' + encodeURIComponent(LEADS.token);
+    fetch(url, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(d),
+      keepalive: true,
+    }).catch(() => {});
+  }
 
   const widget = document.getElementById('wa-widget');
   const popup = document.getElementById('wa-popup');
@@ -428,6 +441,19 @@ import Icon from './Icon.astro';
       `*Página:* ${pagina}`,
     ];
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`;
+
+    enviarLead({
+      origem: 'Popup do site',
+      momento: respostas.momento ?? '',
+      faturamento: respostas.faturamento ?? '',
+      produtos: respostas.produtos ?? '',
+      investimento: respostas.investimento ?? '',
+      nome,
+      whatsapp: whats,
+      email,
+      pagina,
+      texto: lines.join('\n'),
+    });
 
     inputs?.querySelectorAll('.wa-step').forEach((el) => el.classList.add('hidden'));
     void botSay('Perfeito, ' + nome.split(' ')[0] + '! Abrindo seu WhatsApp com tudo preenchido… 🚀', 400).then(() => {

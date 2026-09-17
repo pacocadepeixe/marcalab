@@ -68,6 +68,40 @@ WhatsApp: (11) 90000-0000
 E-mail: maria@exemplo.com
 ```
 
+## Conectar o site à planilha (receber leads AUTOMÁTICO)
+
+Por padrão, as cotações chegam no WhatsApp e você importa colando (acima).
+Para o site gravar **direto** na planilha a cada envio:
+
+1. No editor do **Apps Script** da planilha, use o código atualizado
+   (`googlesheets/LeadsMarcaLab.gs` — contém `doPost`).
+2. Clique em **Implantar → Nova implantação**.
+3. Clique na engrenagem ⚙ ao lado de "Selecionar tipo" → **Aplicativo da Web**.
+   - *Descrição*: leads marcalab
+   - *Executar como*: **Eu (sua conta)**
+   - *Quem tem acesso*: **Qualquer pessoa** ← importante!
+4. **Implantar** → autorize de novo se pedir → copie a **URL do app**
+   (termina em `/exec`).
+5. No projeto do site, abra `src/data/site.ts` e cole a URL em
+   `LEADS.webAppUrl`:
+
+   ```ts
+   export const LEADS = {
+     webAppUrl: 'https://script.google.com/macros/s/AKfyc.../exec',
+     token: 'marcalab-2026',
+   };
+   ```
+
+6. Publique o site de novo (push no GitHub já republica na Vercel).
+
+**Teste:** preencha a cotação no site → além do WhatsApp abrir, a linha
+aparece na aba **Leads** em ~2 segundos.
+
+> Se editar o código do Apps Script depois, use **Implantar → Gerenciar
+> implantações → ✏️ → Nova versão** (a URL continua a mesma).
+> O token `marcalab-2026` precisa ser igual nos dois lados (site e script);
+> troque os dois se quiser outro.
+
 ## Dica: instalar em celulares
 
 Depois de instalado no desktop, abra o mesmo arquivo no app **Planilhas

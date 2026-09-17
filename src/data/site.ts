@@ -183,6 +183,19 @@ export const EXTRA_PORTFOLIO = [
 /** Gancho de preço usado nos CTAs (lote inicial) */
 export const START_PRICE = 'R$ 5 mil';
 
+/**
+ * Integração de leads com o Google Sheets:
+ * 1. Na planilha: Extensões → Apps Script → cole googlesheets/LeadsMarcaLab.gs
+ * 2. Implantar → Nova implantação → tipo "Aplicativo da Web"
+ *    (Executar como: Eu · Quem tem acesso: Qualquer pessoa)
+ * 3. Copie a URL final em /exec e cole abaixo em webAppUrl.
+ * Vazio = o site não envia (as cotações chegam só pelo WhatsApp).
+ */
+export const LEADS = {
+  webAppUrl: '', // ex.: 'https://script.google.com/macros/s/AKfyc.../exec'
+  token: 'marcalab-2026', // precisa ser igual ao WEBHOOK_TOKEN do Apps Script
+};
+
 /** Números exibidos na home (ajuste conforme a realidade da empresa) */
 export const STATS = [
   { value: 'R$ 5 mil', label: 'para lançar sua primeira linha' },

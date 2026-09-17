@@ -178,7 +178,22 @@ import Icon from './Icon.astro';
 </style>
 
 <script>
+  import { LEADS } from '../data/site';
+
   const WHATSAPP_NUMBER = '5511975736730';
+
+  /** Envia o lead direto para o Google Sheets (se configurado). */
+  function enviarLead(d: Record<string, string>) {
+    if (!LEADS.webAppUrl) return;
+    const url = LEADS.webAppUrl + (LEADS.webAppUrl.includes('?') ? '&' : '?') + 'token=' + encodeURIComponent(LEADS.token);
+    fetch(url, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(d),
+      keepalive: true,
+    }).catch(() => {});
+  }
 
   const steps = [
     { title: 'Qual é o seu momento?', subtitle: 'Escolha a opção que mais se aproxima.' },
@@ -310,7 +325,21 @@ import Icon from './Icon.astro';
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
     if (!validateStep()) return;
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildMessage())}`;
+    const mensagem = buildMessage();
+    enviarLead({
+      origem: 'Formulário do site',
+      momento: getCheckedValues('momento')[0] ?? '',
+      faturamento: getCheckedValues('faturamento')[0] ?? '',
+      produtos: getCheckedValues('produtos').join(', '),
+      investimento: getCheckedValues('investimento')[0] ?? '',
+      nome: (document.getElementById('f-nome') as HTMLInputElement).value.trim(),
+      whatsapp: (document.getElementById('f-whats') as HTMLInputElement).value.trim(),
+      email: (document.getElementById('f-email') as HTMLInputElement).value.trim(),
+      observacoes: (document.getElementById('f-msg') as HTMLTextAreaElement).value.trim(),
+      pagina: location.pathname,
+      texto: mensagem,
+    });
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensagem)}`;
     if (successWaLink) successWaLink.href = url;
     form.classList.add('hidden');
     const header = document.getElementById('cotacao-header');

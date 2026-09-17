@@ -18,7 +18,8 @@ da sua indústria quando possível** (basta trocar os arquivos em
 | `blog-produtos.webp` | Blog — categorias Produtos e Mercado | Wikimedia Commons — CC0 |
 | `blog-negocios.webp` | Blog — categoria Negócios | Wikimedia Commons — CC0 ("Handshake") |
 | `blog-marketing.webp` | Blog — categoria Marketing | CC0 |
-| `favicon.svg`, `og-image.png` | Identidade própria | Criados para a Marca Lab |
+| `favicon.png`, `images/logo.png`, `images/logo.webp` | Identidade visual | Logo fornecida pelo cliente (ícone azul de laboratório) |
+| `og-image.png` | Compartilhamento em redes sociais | Criado para a Marca Lab |
 
 ## Como substituir pelas fotos reais (recomendado)
 

@@ -248,3 +248,53 @@ function limparColarAqui_(cola) {
   const ultima = cola.getLastRow();
   if (ultima >= 2) cola.getRange(2, 1, ultima - 1, 1).clearContent();
 }
+
+/* --------------------- WEBHOOK DO SITE (Web App) ------------------- */
+// Implante como "Aplicativo da Web" (ver README) e cole a URL /exec em
+// src/data/site.ts → LEADS.webAppUrl. A partir daí, cada cotação enviada
+// no site (formulário ou popup) cai DIRETO na aba Leads desta planilha.
+
+var WEBHOOK_TOKEN = 'marcalab-2026'; // pode trocar — atualize também no site.ts
+
+function doGet() {
+  return json_({ ok: true, servico: 'Leads Marca Lab — webhook ativo' });
+}
+
+function doPost(e) {
+  try {
+    if (!e.parameter.token || e.parameter.token !== WEBHOOK_TOKEN) {
+      return json_({ ok: false, erro: 'token invalido' });
+    }
+    const d = JSON.parse((e && e.postData && e.postData.contents) || '{}');
+    const nome = String(d.nome || '').trim();
+    if (!nome) return json_({ ok: false, erro: 'campo nome ausente' });
+
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    let leads = ss.getSheetByName(CFG.abaLeads);
+    if (!leads) {
+      leads = ss.insertSheet(CFG.abaLeads, 0);
+      leads.getRange(1, 1, 1, CFG.cabecalhos.length).setValues([CFG.cabecalhos])
+        .setFontWeight('bold').setBackground('#075e54').setFontColor('#ffffff');
+      leads.setFrozenRows(1);
+    }
+
+    const whats = String(d.whatsapp || '');
+    const email = String(d.email || '');
+    if (!leadDuplicado_(leads, nome, whats, email)) {
+      leads.appendRow([
+        new Date(), d.origem || 'Site', nome, whats, email,
+        d.momento || '', d.faturamento || '', d.produtos || '',
+        d.investimento || '', d.pagina || '', d.observacoes || '',
+        'Novo', d.texto || JSON.stringify(d),
+      ]);
+    }
+    return json_({ ok: true });
+  } catch (err) {
+    return json_({ ok: false, erro: String(err) });
+  }
+}
+
+function json_(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
+}
